@@ -1,0 +1,5 @@
+driver=org.postgresql.Driver
+databaseName=Estate
+url=jdbc:postgresql://localhost:5432/Estate
+user=postgres
+password=123
