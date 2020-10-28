@@ -1,5 +1,6 @@
 package com.ithillel.appcontext;
 
+import com.ithillel.dao.interfaces.AreaDao;
 import com.ithillel.dao.interfaces.RegionDao;
 import com.ithillel.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +44,7 @@ public class ApplicationContext {
         System.out.println(env.getProperty("hibernate.dialect"));
         props.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
         props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        props.put("show_sql", env.getProperty("show_sql"));
         entityManagerFactory.setJpaProperties(props);
         return entityManagerFactory;
     }
@@ -76,9 +78,10 @@ public class ApplicationContext {
 //                = new ClassPathXmlApplicationContext("classpath:springCfg.xml");
 //        System.out.println(annotationConfigApplicationContext.getBean("dataSource").toString());
         RegionDao regionDao = (RegionDao) annotationConfigApplicationContext.getBean("regionDaoImpl");
+        AreaDao oblastDao = (AreaDao) annotationConfigApplicationContext.getBean("areaDaoImpl");
         Region region = new Region();
         region.setName("Одесса");
-        Oblast oblast = new Oblast();
+        Area oblast = new Area();
         oblast.setDistricts(new ArrayList<>());
         oblast.setName("Одесская обл.");
         oblast.setRegion(region);
@@ -128,5 +131,10 @@ public class ApplicationContext {
         realtor1.setPropertyList(List.of(realProperty1));
 
         regionDao.add(region);
+
+        Region x = regionDao.get(1L);
+        System.out.println(x);
+        Area x1 = oblastDao.get(1L);
+        System.out.println(x1.getDistricts().size());
     }
 }

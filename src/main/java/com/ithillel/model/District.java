@@ -9,8 +9,8 @@ import java.util.List;
 public class District extends CustomModel {
 
     @ManyToOne
-    @JoinColumn(name = "oblast_id", referencedColumnName = "id")
-    private Oblast oblast;
+    @JoinColumn(name = "area_id", referencedColumnName = "id")
+    private Area oblast;
 
     @OneToMany(mappedBy = "district", cascade = CascadeType.ALL)
     private List<City> cities;
@@ -18,11 +18,11 @@ public class District extends CustomModel {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "district")
     private List<EstateAgency> estateAgency;
 
-    public Oblast getOblast() {
+    public Area getOblast() {
         return oblast;
     }
 
-    public void setOblast(Oblast oblast) {
+    public void setOblast(Area oblast) {
         this.oblast = oblast;
     }
 

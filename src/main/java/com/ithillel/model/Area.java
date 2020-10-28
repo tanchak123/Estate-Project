@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "oblast")
-@SequenceGenerator(name = "seq_name", sequenceName = "oblast_id_seq", allocationSize = 1)
-public class Oblast extends CustomModel {
+@Table(name = "area")
+@SequenceGenerator(name = "seq_name", sequenceName = "area_id_seq", allocationSize = 1)
+public class Area extends CustomModel {
 
-    public Oblast() {
+    public Area() {
     }
 
     @OneToOne

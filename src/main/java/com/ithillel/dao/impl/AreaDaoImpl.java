@@ -1,8 +1,7 @@
 package com.ithillel.dao.impl;
 
-import com.ithillel.dao.CustomDao;
-import com.ithillel.dao.interfaces.RegionDao;
-import com.ithillel.model.Region;
+import com.ithillel.dao.interfaces.AreaDao;
+import com.ithillel.model.Area;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -13,39 +12,40 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-public class RegionDaoImpl implements RegionDao {
+public class AreaDaoImpl implements AreaDao {
 
     @PersistenceContext
     private EntityManager entityManager;
+
     @PersistenceUnit
     private EntityManagerFactory entityManagerFactory;
 
     @Override
-    @Transactional
-    public void add(final Region region) {
-        entityManager.persist(region);
+    public void add(Area instance) {
+
     }
 
     @Override
-    @Transactional
-    public Region get(Long id) {
-        return entityManager.find(Region.class, Math.toIntExact(id));
+//    @Transactional
+    public Area get(Long id) {
+        Area area = entityManager.find(Area.class, Integer.valueOf(String.valueOf(id)));
+        area.getDistricts().size();
+        return area;
+
     }
 
     @Override
-    public List<Region> getAll() {
+    public List<Area> getAll() {
         return null;
     }
 
     @Override
-    public Region update(Long id) {
+    public Area update(Long id) {
         return null;
     }
 
     @Override
-    public Region delete(Long id) {
+    public Area delete(Long id) {
         return null;
     }
-
-
 }

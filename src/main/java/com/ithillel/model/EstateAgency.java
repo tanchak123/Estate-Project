@@ -10,16 +10,16 @@ public class EstateAgency extends CustomModel {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "EstateAgency_Realtor",
+            name = "estate_agency_realtor",
             joinColumns = {
-                    @JoinColumn(name = "estateAgency_id"),
+                    @JoinColumn(name = "estate_agency_id"),
             },
             inverseJoinColumns = {@JoinColumn(name = "realtor_id")}
     )
     private List<Realtor> realtorList;
 
     @ManyToOne
-    @JoinColumn(name = "district_id", columnDefinition = "id")
+    @JoinColumn(name = "district_id")
     private District district;
 
     public List<Realtor> getRealtorList() {

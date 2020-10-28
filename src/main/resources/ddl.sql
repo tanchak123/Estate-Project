@@ -1,73 +1,78 @@
-create sequence seq_name;
-create table region (
+create table if not exists region (
     id serial primary key ,
     name varchar(100) not null,
     create_data timestamp with time zone not null default current_timestamp,
     update_data timestamp without time zone not null default current_timestamp
 );
-create table oblast (
+create table if not exists area (
                         id serial primary key ,
                         name varchar(100) not null,
                         region_id integer not null ,
                         create_data timestamp with time zone not null default current_timestamp,
                         update_data timestamp without time zone not null default current_timestamp
 );
-create table district (
+
+create table if not exists district (
                           id serial primary key ,
                           name varchar(100) not null,
-                          oblast_id integer not null ,
+                          area_id integer not null ,
                           create_data timestamp with time zone not null default current_timestamp,
                           update_data timestamp without time zone not null default current_timestamp
 );
-create table city (
+create table if not exists city (
                         id serial primary key ,
                         name varchar(100) not null,
                         district_id integer not null ,
                         create_data timestamp with time zone not null default current_timestamp,
                         update_data timestamp without time zone not null default current_timestamp
 );
-create table estate_agency (
+create table if not exists estate_agency (
                       id serial primary key ,
                       name varchar(100) not null,
                       district_id integer not null ,
                       create_data timestamp with time zone not null default current_timestamp,
                       update_data timestamp without time zone not null default current_timestamp
 );
-create table realtor (
+create table if not exists realtor (
                                id serial primary key ,
                                name varchar(100) not null,
                                create_data timestamp with time zone not null default current_timestamp,
                                update_data timestamp without time zone not null default current_timestamp
 );
-create table real_property(
+create table if not exists real_property(
                               id serial primary key ,
                               name varchar(100) not null,
                               create_data timestamp with time zone not null default current_timestamp,
                               update_data timestamp without time zone not null default current_timestamp
 );
-create table EstateAgency_Realtor(
-                              id serial primary key ,
-                              estateAgency_id integer not null,
-                              realtor_id integer not null ,
-                              create_data timestamp with time zone not null default current_timestamp,
-                              update_data timestamp without time zone not null default current_timestamp
+create table if not exists real_property_realtor
+(
+    realtor_id       integer not null
+            references real_property(id),
+    real_property_id integer not null
+            references realtor(id)
 );
-create table realProperty_Realtor(
-                                     id serial primary key ,
-                                     real_property_id integer not null,
-                                     realtor_id integer not null ,
-                                     create_data timestamp with time zone not null default current_timestamp,
-                                     update_data timestamp without time zone not null default current_timestamp
+create table if not exists estate_agency_realtor
+(
+    estate_agency_id integer not null
+        constraint FK_ear_ea
+            references estate_agency,
+    realtor_id integer not null
+        constraint FK_ear_r
+            references realtor
 );
+
+
 DELETE FROM region;
 DELETE FROM city;
-DELETE FROM oblast;
+DELETE FROM area;
 DELETE FROM district;
 DELETE FROM estate_agency;
+DELETE FROM estate_agency_realtor;
+DELETE FROM real_property_realtor;
+DELETE from realtor;
 DELETE FROM real_property;
-ALTER table real_property drop realtor_id
 alter sequence city_id_seq restart 1;
 alter sequence district_id_seq restart 1;
-alter sequence oblast_id_seq restart 1;
+alter sequence area_id_seq restart 1;
 alter sequence region_id_seq restart 1;
-alter sequence seq_name restart 1;

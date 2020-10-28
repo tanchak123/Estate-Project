@@ -10,7 +10,7 @@ import java.util.List;
 public class RealProperty extends CustomModel {
 
     @ManyToMany
-    @JoinTable(name = "realProperty_Realtor",
+    @JoinTable(name = "real_property_Realtor",
             joinColumns = @JoinColumn(name = "realtor_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "real_property_id", referencedColumnName = "id")
 

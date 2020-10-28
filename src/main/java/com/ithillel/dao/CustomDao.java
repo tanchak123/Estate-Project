@@ -2,15 +2,17 @@ package com.ithillel.dao;
 
 import com.ithillel.model.Region;
 
+import java.util.List;
+
 public interface CustomDao<C, L> {
 
     public void add(C instance);
 
-    public void get(L id);
+    public C get(L id);
 
-    public void getAll();
+    public List<C> getAll();
 
-    public void update(L id);
+    public C update(L id);
 
-    public void delete(L id);
+    public C delete(L id);
 }
