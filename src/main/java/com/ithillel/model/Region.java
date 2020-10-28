@@ -8,17 +8,17 @@ import javax.persistence.*;
 public class Region extends CustomModel {
 
     @OneToOne(mappedBy = "region", cascade = CascadeType.ALL)
-    private Area oblast;
+    private Area area;
 
     public Region() {
 
     };
 
-    public Area getOblast() {
-        return oblast;
+    public Area getArea() {
+        return area;
     }
 
-    public void setOblast(Area oblast) {
-        this.oblast = oblast;
+    public void setArea(Area area) {
+        this.area = area;
     }
 }
