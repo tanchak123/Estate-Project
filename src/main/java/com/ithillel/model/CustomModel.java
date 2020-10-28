@@ -15,12 +15,12 @@ public class CustomModel {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_name")
     private Integer id;
 
-    @Column(name = "update_data")
+    @Column(name = "update_date")
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     private Calendar calendar;
 
-    @Column(name = "create_data")
+    @Column(name = "create_date")
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Calendar calendarC;

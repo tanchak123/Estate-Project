@@ -85,7 +85,7 @@ public class ApplicationContext {
         oblast.setDistricts(new ArrayList<>());
         oblast.setName("Одесская обл.");
         oblast.setRegion(region);
-        region.setOblast(oblast);
+        region.setArea(oblast);
 
         District district = new District();
         district.setName("Суворовский");

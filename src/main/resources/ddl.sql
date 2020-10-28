@@ -1,49 +1,49 @@
 create table if not exists region (
     id serial primary key ,
     name varchar(100) not null,
-    create_data timestamp with time zone not null default current_timestamp,
-    update_data timestamp without time zone not null default current_timestamp
+    create_date timestamp with time zone not null default current_timestamp,
+    update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists area (
                         id serial primary key ,
                         name varchar(100) not null,
                         region_id integer not null ,
-                        create_data timestamp with time zone not null default current_timestamp,
-                        update_data timestamp without time zone not null default current_timestamp
+                        create_date timestamp with time zone not null default current_timestamp,
+                        update_date timestamp without time zone not null default current_timestamp
 );
 
 create table if not exists district (
                           id serial primary key ,
                           name varchar(100) not null,
                           area_id integer not null ,
-                          create_data timestamp with time zone not null default current_timestamp,
-                          update_data timestamp without time zone not null default current_timestamp
+                          create_date timestamp with time zone not null default current_timestamp,
+                          update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists city (
                         id serial primary key ,
                         name varchar(100) not null,
                         district_id integer not null ,
-                        create_data timestamp with time zone not null default current_timestamp,
-                        update_data timestamp without time zone not null default current_timestamp
+                        create_date timestamp with time zone not null default current_timestamp,
+                        update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists estate_agency (
                       id serial primary key ,
                       name varchar(100) not null,
                       district_id integer not null ,
-                      create_data timestamp with time zone not null default current_timestamp,
-                      update_data timestamp without time zone not null default current_timestamp
+                      create_date timestamp with time zone not null default current_timestamp,
+                      update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists realtor (
                                id serial primary key ,
                                name varchar(100) not null,
-                               create_data timestamp with time zone not null default current_timestamp,
-                               update_data timestamp without time zone not null default current_timestamp
+                               create_date timestamp with time zone not null default current_timestamp,
+                               update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists real_property(
                               id serial primary key ,
                               name varchar(100) not null,
-                              create_data timestamp with time zone not null default current_timestamp,
-                              update_data timestamp without time zone not null default current_timestamp
+                              create_date timestamp with time zone not null default current_timestamp,
+                              update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists real_property_realtor
 (
