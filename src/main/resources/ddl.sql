@@ -63,7 +63,7 @@ create table if not exists estate_agency_realtor
 );
 
 
-DELETE FROM real_property_realtor;
+DELETE FROM region;
 DELETE FROM city;
 DELETE FROM area;
 DELETE FROM district;
