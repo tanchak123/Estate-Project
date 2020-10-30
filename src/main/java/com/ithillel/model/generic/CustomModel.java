@@ -1,4 +1,4 @@
-package com.ithillel.model;
+package com.ithillel.model.generic;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;

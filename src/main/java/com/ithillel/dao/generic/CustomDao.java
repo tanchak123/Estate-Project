@@ -1,4 +1,4 @@
-package com.ithillel.dao;
+package com.ithillel.dao.generic;
 
 import com.ithillel.model.Region;
 
@@ -6,13 +6,14 @@ import java.util.List;
 
 public interface CustomDao<C, L> {
 
-    public void add(C instance);
+    void add(C instance);
 
     public C get(L id);
 
     public List<C> getAll();
 
-    public C update(L id);
+    public C update(C instance);
 
-    public C delete(L id);
+    public C delete(C instance);
+
 }

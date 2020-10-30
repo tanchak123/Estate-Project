@@ -1,6 +1,6 @@
 package com.ithillel.model;
 
-import org.hibernate.engine.internal.Cascade;
+import com.ithillel.model.generic.CustomModel;
 
 import javax.persistence.*;
 

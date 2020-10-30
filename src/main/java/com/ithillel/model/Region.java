@@ -1,5 +1,7 @@
 package com.ithillel.model;
 
+import com.ithillel.model.generic.CustomModel;
+
 import javax.persistence.*;
 
 @Entity

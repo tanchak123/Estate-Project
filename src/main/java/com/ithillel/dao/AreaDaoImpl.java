@@ -1,4 +1,4 @@
-package com.ithillel.dao.impl;
+package com.ithillel.dao;
 
 import com.ithillel.dao.interfaces.AreaDao;
 import com.ithillel.model.Area;
@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -22,11 +24,10 @@ public class AreaDaoImpl implements AreaDao {
 
     @Override
     public void add(Area instance) {
-
+        entityManager.persist(instance);
     }
 
     @Override
-//    @Transactional
     public Area get(Long id) {
         Area area = entityManager.find(Area.class, Integer.valueOf(String.valueOf(id)));
         area.getDistricts().size();
@@ -36,16 +37,19 @@ public class AreaDaoImpl implements AreaDao {
 
     @Override
     public List<Area> getAll() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Area> criteriaQuery = criteriaBuilder.createQuery(Area.class);
         return null;
     }
 
     @Override
-    public Area update(Long id) {
+    public Area update(Area instance) {
         return null;
     }
 
     @Override
-    public Area delete(Long id) {
+    public Area delete(Area instance) {
         return null;
     }
+
 }
