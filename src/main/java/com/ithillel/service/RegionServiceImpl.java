@@ -13,11 +13,8 @@ import java.util.List;
 @Transactional
 public class RegionServiceImpl implements RegionService {
 
-    RegionDao regionDao;
-
     @Autowired
-    public RegionServiceImpl() {
-    }
+    RegionDao regionDao;
 
     @Override
     public void create(Region region) {
@@ -41,7 +38,7 @@ public class RegionServiceImpl implements RegionService {
 
     @Override
     public Region delete(Region region) {
-        return regionDao.delete(region);
+        return regionDao.delete(regionDao.get(region.getId().longValue()));
     }
 
     @Override

@@ -1,8 +1,7 @@
 package com.ithillel.appcontext;
 
-import com.ithillel.dao.interfaces.AreaDao;
-import com.ithillel.dao.interfaces.RegionDao;
 import com.ithillel.model.*;
+import com.ithillel.service.interfaces.RegionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -78,8 +77,10 @@ public class ApplicationContext {
 //        ClassPathXmlApplicationContext applicationContext
 //                = new ClassPathXmlApplicationContext("classpath:springCfg.xml");
 //        System.out.println(annotationConfigApplicationContext.getBean("dataSource").toString());
-        RegionDao regionDao = (RegionDao) annotationConfigApplicationContext.getBean("regionDaoImpl");
-        AreaDao oblastDao = (AreaDao) annotationConfigApplicationContext.getBean("areaDaoImpl");
+        RegionService regionService = (RegionService)
+                annotationConfigApplicationContext.getBean("regionServiceImpl");
+//        AreaService areaService = (AreaService) annotationConfigApplicationContext.getBean("areaServiceImpl");
+
 //        Region region = new Region();
 //        region.setName("Одесса");
 //        Area oblast = new Area();
@@ -131,14 +132,17 @@ public class ApplicationContext {
 //        realProperty1.setRealtors(new ArrayList<>(List.of(realtor1)));
 //        realtor1.setPropertyList(List.of(realProperty1));
 //
-//        regionDao.add(region);
+//        regionService.create(region);
+//
+//        regionService.getAll().forEach(region1 -> System.out.println(region1.getName()));
+//        Region x = regionService.getById(1L);
+//        System.out.println(x);
+//        x.setName("Одесса");
+//        regionService.update(x);
 
-        regionDao.getAll().forEach(region -> System.out.println(region.getName()));
-        Region x = regionDao.get(1L);
-        System.out.println(x);
-        x.setName("Одесса");
-        regionDao.update(x);
-        Area x1 = oblastDao.get(1L);
-        System.out.println(x1.getDistricts().size());
+        regionService.delete(regionService.getById(2L));
+
+//        Area x1 = areaService.get(1L);
+//        System.out.println(x1.getDistricts().size());
     }
 }
