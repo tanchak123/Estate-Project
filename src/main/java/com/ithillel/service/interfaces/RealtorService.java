@@ -1,4 +1,7 @@
 package com.ithillel.service.interfaces;
 
-public interface RealtorService {
+import com.ithillel.model.Realtor;
+import com.ithillel.service.generic.CustomService;
+
+public interface RealtorService extends CustomService<Realtor, Long> {
 }

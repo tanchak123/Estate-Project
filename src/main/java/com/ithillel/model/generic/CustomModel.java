@@ -1,15 +1,18 @@
 package com.ithillel.model.generic;
 
+import java.util.Calendar;
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.Calendar;
-import java.util.Objects;
-
 @MappedSuperclass
-public class CustomModel {
+public class CustomModel implements GetId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_name")
@@ -51,6 +54,7 @@ public class CustomModel {
         this.name = name;
     }
 
+    @Override
     public Integer getId() {
         return id;
     }

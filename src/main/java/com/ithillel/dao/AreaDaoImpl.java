@@ -2,16 +2,14 @@ package com.ithillel.dao;
 
 import com.ithillel.dao.interfaces.AreaDao;
 import com.ithillel.model.Area;
-import org.springframework.stereotype.Repository;
-
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceUnit;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.transaction.Transactional;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public class AreaDaoImpl implements AreaDao {
@@ -23,8 +21,9 @@ public class AreaDaoImpl implements AreaDao {
     private EntityManagerFactory entityManagerFactory;
 
     @Override
-    public void add(Area instance) {
+    public Area create(Area instance) {
         entityManager.persist(instance);
+        return instance;
     }
 
     @Override

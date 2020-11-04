@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CustomService<C, L> {
 
-    void create(C c);
+    C create(C c);
 
     C deleteById(L l);
 

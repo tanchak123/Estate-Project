@@ -1,10 +1,17 @@
 package com.ithillel.model;
 
 import com.ithillel.model.generic.CustomModel;
-
-import javax.persistence.*;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 @Table(name = "district")
 @SequenceGenerator(name = "seq_name", sequenceName = "district_id_seq", allocationSize = 1)

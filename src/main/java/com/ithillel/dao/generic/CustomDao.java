@@ -1,12 +1,10 @@
 package com.ithillel.dao.generic;
 
-import com.ithillel.model.Region;
-
 import java.util.List;
 
 public interface CustomDao<C, L> {
 
-    void add(C instance);
+    C create(C instance);
 
     public C get(L id);
 

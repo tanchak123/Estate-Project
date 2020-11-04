@@ -1,9 +1,14 @@
 package com.ithillel.model;
 
 import com.ithillel.model.generic.CustomModel;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
-
+@Component
 @Entity
 @Table(name = "region")
 @SequenceGenerator(name = "seq_name", sequenceName = "region_id_seq", allocationSize = 1)
@@ -14,7 +19,7 @@ public class Region extends CustomModel {
 
     public Region() {
 
-    };
+    }
 
     public Area getArea() {
         return area;

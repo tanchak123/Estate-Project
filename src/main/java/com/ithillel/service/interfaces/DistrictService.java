@@ -1,4 +1,7 @@
 package com.ithillel.service.interfaces;
 
-public interface DistrictService {
+import com.ithillel.model.District;
+import com.ithillel.service.generic.CustomService;
+
+public interface DistrictService extends CustomService<District, Long> {
 }
