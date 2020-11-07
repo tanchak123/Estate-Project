@@ -2,11 +2,8 @@ package com.ithillel.model;
 
 import com.ithillel.model.generic.CustomModel;
 import java.util.List;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -20,6 +17,28 @@ public class Realtor extends CustomModel {
 
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "realtors")
     private List<RealProperty> propertyList;
+
+    @JoinColumn(name = "surname")
+    private String surName;
+
+    @JoinColumn(name = "experience_in_years")
+    private int experience;
+
+    public String getSurName() {
+        return surName;
+    }
+
+    public void setSurName(String surName) {
+        this.surName = surName;
+    }
+
+    public int getExperience() {
+        return experience;
+    }
+
+    public void setExperience(int experience) {
+        this.experience = experience;
+    }
 
     public List<EstateAgency> getEstateAgency() {
         return estateAgency;

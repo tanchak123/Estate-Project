@@ -1,13 +1,10 @@
 package com.ithillel.model;
 
+import com.ithillel.model.description.CustomDescription;
 import com.ithillel.model.generic.CustomModel;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 import org.springframework.stereotype.Component;
 
 @Component

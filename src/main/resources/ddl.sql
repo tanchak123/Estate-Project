@@ -1,11 +1,11 @@
 create table if not exists region (
-    id serial primary key ,
+    id bigserial primary key ,
     name varchar(100) not null,
     create_date timestamp with time zone not null default current_timestamp,
     update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists area (
-                        id serial primary key ,
+                        id bigserial primary key ,
                         name varchar(100) not null,
                         region_id integer not null ,
                         create_date timestamp with time zone not null default current_timestamp,
@@ -13,34 +13,36 @@ create table if not exists area (
 );
 
 create table if not exists district (
-                          id serial primary key ,
+                          id bigserial primary key ,
                           name varchar(100) not null,
                           area_id integer not null ,
                           create_date timestamp with time zone not null default current_timestamp,
                           update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists city (
-                        id serial primary key ,
+                        id bigserial primary key ,
                         name varchar(100) not null,
                         district_id integer not null ,
                         create_date timestamp with time zone not null default current_timestamp,
                         update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists estate_agency (
-                      id serial primary key ,
+                      id bigserial primary key ,
                       name varchar(100) not null,
                       district_id integer not null ,
                       create_date timestamp with time zone not null default current_timestamp,
                       update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists realtor (
-                               id serial primary key ,
+                               id bigserial primary key ,
                                name varchar(100) not null,
+                               surname varchar(100) not null,
+                               experience_in_years int not null,
                                create_date timestamp with time zone not null default current_timestamp,
                                update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists real_property(
-                              id serial primary key ,
+                              id bigserial primary key ,
                               name varchar(100) not null,
                               create_date timestamp with time zone not null default current_timestamp,
                               update_date timestamp without time zone not null default current_timestamp
@@ -61,6 +63,10 @@ create table if not exists estate_agency_realtor
         constraint FK_ear_r
             references realtor
 );
+create table if not exists description
+(
+
+)
 
 
 DELETE FROM region;

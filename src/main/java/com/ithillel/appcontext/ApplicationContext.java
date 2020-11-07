@@ -1,7 +1,13 @@
 package com.ithillel.appcontext;
 
-import com.ithillel.model.Region;
+import com.ithillel.model.*;
+import com.ithillel.model.description.CustomDescription;
+import com.ithillel.service.interfaces.AreaService;
 import com.ithillel.service.interfaces.RegionService;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -84,7 +90,7 @@ public class ApplicationContext {
         System.out.println(annotationConfigApplicationContext.getBean("dataSource").toString());*/
         RegionService regionService = (RegionService)
                 annotationConfigApplicationContext.getBean("regionServiceImpl");
-        /*        AreaService areaService = (AreaService)
+                AreaService areaService = (AreaService)
         annotationConfigApplicationContext.getBean("areaServiceImpl");
 
         Region region = new Region();
@@ -94,6 +100,10 @@ public class ApplicationContext {
         oblast.setName("Одесская обл.");
         oblast.setRegion(region);
         region.setArea(oblast);
+
+        CustomDescription customDescription = new CustomDescription();
+        customDescription.setDescription("fsdafdas");
+        region.setDescription(customDescription);
 
         District district = new District();
         district.setName("Суворовский");
@@ -144,12 +154,12 @@ public class ApplicationContext {
         Region x = regionService.getById(1L);
         System.out.println(x);
         x.setName("Одесса");
-        regionService.update(x);*/
+        regionService.update(x);
 
-        Region byId = regionService.getById(5L);
-        byId.setName("TESTa");
-        regionService.update(byId);
-        regionService.delete(byId);
+//        Region byId = regionService.getById(5L);
+//        byId.setName("TESTa");
+//        regionService.update(byId);
+//        regionService.delete(byId);
 
         /*        Area x1 = areaService.get(1L);
         System.out.println(x1.getDistricts().size());*/

@@ -1,13 +1,9 @@
 package com.ithillel.model.generic;
 
 import java.util.Calendar;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
+
+import com.ithillel.model.description.CustomDescription;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -27,6 +23,9 @@ public class CustomModel implements GetId {
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Calendar calendarC;
+
+    @Embedded()
+    CustomDescription description;
 
     private String name;
 
@@ -61,5 +60,13 @@ public class CustomModel implements GetId {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public CustomDescription getDescription() {
+        return description;
+    }
+
+    public void setDescription(CustomDescription description) {
+        this.description = description;
     }
 }
