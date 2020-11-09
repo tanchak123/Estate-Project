@@ -33,7 +33,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ImportResource("classpath:springCfg.xml")
-@ComponentScan({"com.ithillel.service",
+@ComponentScan(value = {"com.ithillel.service",
         "com.ithillel.dao",
         "com.ithillel.model"})
 @PropertySources({
