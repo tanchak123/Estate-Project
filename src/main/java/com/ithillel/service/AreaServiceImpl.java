@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AreaServiceImpl extends GenericServiceImpl<Area, Long> implements AreaService {
 
-    AreaDao areaDao;
+    private AreaDao areaDao;
 
     @Autowired
     public AreaServiceImpl(AreaDao areaDao) {

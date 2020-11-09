@@ -1,48 +1,45 @@
 package com.ithillel.model.generic;
 
-import java.util.Calendar;
-import javax.persistence.*;
+import com.ithillel.utils.CreateTimeStampConverter;
+import com.ithillel.utils.UpdateTimeStampConverter;
 
-import com.ithillel.model.description.CustomDescription;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
+import java.sql.Timestamp;
+import javax.persistence.*;
 
 @MappedSuperclass
 public class CustomModel implements GetId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_name")
-    private Integer id;
+    private Long id;
 
     @Column(name = "update_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    @UpdateTimestamp
-    private Calendar calendar;
+    @Convert(converter = UpdateTimeStampConverter.class)
+    private Timestamp updateDate;
 
     @Column(name = "create_date")
-    @Temporal(TemporalType.TIMESTAMP)
-    @CreationTimestamp
-    private Calendar calendarC;
+    @Convert(converter = CreateTimeStampConverter.class)
+    private Timestamp createDate;
 
-    @Embedded()
-    CustomDescription description;
+//    @Embedded()
+//    CustomDescription description;
 
     private String name;
 
-    public Calendar getCalendar() {
-        return calendar;
+    public Timestamp getUpdateDate() {
+        return updateDate;
     }
 
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
+    public void setUpdateDate(Timestamp updateDate) {
+        this.updateDate = updateDate;
     }
 
-    public Calendar getCalendarC() {
-        return calendarC;
+    public Timestamp getCreateDate() {
+        return createDate;
     }
 
-    public void setCalendarC(Calendar calendarC) {
-        this.calendarC = calendarC;
+    public void setCreateDate(Timestamp createDate) {
+        this.createDate = createDate;
     }
 
     public String getName() {
@@ -54,19 +51,13 @@ public class CustomModel implements GetId {
     }
 
     @Override
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public CustomDescription getDescription() {
-        return description;
-    }
 
-    public void setDescription(CustomDescription description) {
-        this.description = description;
-    }
 }

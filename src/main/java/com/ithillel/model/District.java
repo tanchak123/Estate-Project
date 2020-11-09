@@ -19,20 +19,20 @@ public class District extends CustomModel {
 
     @ManyToOne
     @JoinColumn(name = "area_id", referencedColumnName = "id")
-    private Area oblast;
+    private Area area;
 
-    @OneToMany(mappedBy = "district", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "district", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<City> cities;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "district")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "district")
     private List<EstateAgency> estateAgency;
 
-    public Area getOblast() {
-        return oblast;
+    public Area getArea() {
+        return area;
     }
 
-    public void setOblast(Area oblast) {
-        this.oblast = oblast;
+    public void setArea(Area area) {
+        this.area = area;
     }
 
     public List<City> getCities() {

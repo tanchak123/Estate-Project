@@ -17,11 +17,11 @@ import org.springframework.stereotype.Component;
 @SequenceGenerator(name = "seq_name", sequenceName = "area_id_seq", allocationSize = 1)
 public class Area extends CustomModel {
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "region_id", referencedColumnName = "id")
     private Region region;
 
-    @OneToMany(mappedBy = "oblast", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "area", cascade = CascadeType.ALL)
     private List<District> districts;
 
     public Area() {

@@ -54,4 +54,8 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L> {
     public List<C> getAll() {
         return customDao.getAll();
     }
+
+    public CustomDao<C, L> getCustomDao() {
+        return customDao;
+    }
 }

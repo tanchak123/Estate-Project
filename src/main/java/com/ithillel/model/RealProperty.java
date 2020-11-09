@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @SequenceGenerator(name = "seq_name", sequenceName = "real_property_id_seq", allocationSize = 1)
 public class RealProperty extends CustomModel {
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "real_property_Realtor",
             joinColumns = @JoinColumn(name = "realtor_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "real_property_id", referencedColumnName = "id")

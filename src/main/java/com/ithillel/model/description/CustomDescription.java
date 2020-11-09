@@ -7,9 +7,7 @@ import javax.persistence.*;
 @Embeddable
 public class CustomDescription {
 
-    String description;
-
-    String asdfas;
+    private String description;
 
     public String getDescription() {
         return description;

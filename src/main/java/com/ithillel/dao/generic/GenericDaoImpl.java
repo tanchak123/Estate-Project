@@ -29,7 +29,7 @@ public abstract class GenericDaoImpl<C, L> implements CustomDao<C, L> {
 
     @Override
     public C get(L id) {
-        return (C) entityManager.find(instance.getClass(),Integer.parseInt("" + id));
+        return (C) entityManager.find(instance.getClass(), id);
     }
 
     @Override

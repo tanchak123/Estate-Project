@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @SequenceGenerator(name = "seq_name", sequenceName = "estate_agency_id_seq", allocationSize = 1)
 public class EstateAgency extends CustomModel {
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "estate_agency_realtor",
             joinColumns = {
@@ -28,7 +28,7 @@ public class EstateAgency extends CustomModel {
     )
     private List<Realtor> realtorList;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "district_id")
     private District district;
 

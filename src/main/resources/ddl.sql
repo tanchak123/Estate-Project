@@ -7,7 +7,7 @@ create table if not exists region (
 create table if not exists area (
                         id bigserial primary key ,
                         name varchar(100) not null,
-                        region_id integer not null ,
+                        region_id bigint not null ,
                         create_date timestamp with time zone not null default current_timestamp,
                         update_date timestamp without time zone not null default current_timestamp
 );
@@ -15,21 +15,21 @@ create table if not exists area (
 create table if not exists district (
                           id bigserial primary key ,
                           name varchar(100) not null,
-                          area_id integer not null ,
+                          area_id bigint not null ,
                           create_date timestamp with time zone not null default current_timestamp,
                           update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists city (
                         id bigserial primary key ,
                         name varchar(100) not null,
-                        district_id integer not null ,
+                        district_id bigint not null ,
                         create_date timestamp with time zone not null default current_timestamp,
                         update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists estate_agency (
                       id bigserial primary key ,
                       name varchar(100) not null,
-                      district_id integer not null ,
+                      district_id bigint not null ,
                       create_date timestamp with time zone not null default current_timestamp,
                       update_date timestamp without time zone not null default current_timestamp
 );
@@ -49,17 +49,17 @@ create table if not exists real_property(
 );
 create table if not exists real_property_realtor
 (
-    realtor_id       integer not null
+    realtor_id bigint not null
             references real_property(id),
-    real_property_id integer not null
+    real_property_id bigint not null
             references realtor(id)
 );
 create table if not exists estate_agency_realtor
 (
-    estate_agency_id integer not null
+    estate_agency_id bigint not null
         constraint FK_ear_ea
             references estate_agency,
-    realtor_id integer not null
+    realtor_id bigint not null
         constraint FK_ear_r
             references realtor
 );

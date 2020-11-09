@@ -12,16 +12,16 @@ import org.springframework.stereotype.Component;
 @SequenceGenerator(name = "seq_name", sequenceName = "realtor_id_seq", allocationSize = 1)
 public class Realtor extends CustomModel {
 
-    @ManyToMany(mappedBy = "realtorList")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "realtorList")
     private List<EstateAgency> estateAgency;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "realtors")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "realtors")
     private List<RealProperty> propertyList;
 
-    @JoinColumn(name = "surname")
+    @Column(name = "surname")
     private String surName;
 
-    @JoinColumn(name = "experience_in_years")
+    @Column(name = "experience_in_years")
     private int experience;
 
     public String getSurName() {
