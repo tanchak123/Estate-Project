@@ -8,6 +8,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
+import java.time.Instant;
+
 @Component
 @Entity
 @Table(name = "region")

@@ -18,15 +18,10 @@ import java.util.List;
 @Service
 public class RealtorServiceImpl extends GenericServiceImpl<Realtor, Long> implements RealtorService {
 
-    RealtorDao realtorDao;
-
-    EstateAgency estateAgency;
 
     @Autowired
-    public RealtorServiceImpl(RealtorDao realtorDao, EstateAgency estateAgency) {
+    public RealtorServiceImpl(RealtorDao realtorDao) {
         super(realtorDao);
-        this.realtorDao = realtorDao;
-        this.estateAgency = estateAgency;
     }
 
 
@@ -36,8 +31,8 @@ public class RealtorServiceImpl extends GenericServiceImpl<Realtor, Long> implem
         realtor = getById(realtor.getId());
         clearEstateAgencies(realtor.getEstateAgency(), realtor);
         clearRealProperties(realtor.getPropertyList(), realtor);
-        realtorDao.update(realtor);
-        return realtorDao.delete(realtor);
+        customDao.update(realtor);
+        return customDao.delete(realtor);
     }
 
     private void clearEstateAgencies(List<EstateAgency> estateAgencies, Realtor realtor) {

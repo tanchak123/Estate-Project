@@ -57,7 +57,7 @@ public class ApplicationContext {
         System.out.println(env.getProperty("hibernate.dialect"));
         props.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
         props.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-        props.put("show_sql", env.getProperty("show_sql"));
+        props.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         entityManagerFactory.setJpaProperties(props);
         return entityManagerFactory;
     }
@@ -95,17 +95,17 @@ public class ApplicationContext {
 //                AreaService areaService = (AreaService)
 //        annotationConfigApplicationContext.getBean("areaServiceImpl");
 //
-//        Region region = new Region();
-//        region.setName("Одесса");
+//        Region service.region = new Region();
+//        service.region.setName("Одесса");
 //        Area oblast = new Area();
 //        oblast.setDistricts(new ArrayList<>());
 //        oblast.setName("Одесская обл.");
-//        oblast.setRegion(region);
-//        region.setArea(oblast);
+//        oblast.setRegion(service.region);
+//        service.region.setArea(oblast);
 //
 ////        CustomDescription customDescription = new CustomDescription();
 ////        customDescription.setDescription("fsdafdas");
-////        region.setDescription(customDescription);
+////        service.region.setDescription(customDescription);
 //
 //        District district = new District();
 //        district.setName("Суворовский");
@@ -152,7 +152,7 @@ public class ApplicationContext {
 //        realProperty1.setRealtors(new ArrayList<>(List.of(realtor1)));
 //        realtor1.setPropertyList(List.of(realProperty1));
 //
-//        regionService.create(region);
+//        regionService.create(service.region);
 //
 //        regionService.getAll().forEach(region1 -> System.out.println(region1.getName()));
 //
@@ -167,7 +167,7 @@ public class ApplicationContext {
         RealtorService realtorService = (RealtorService) annotationConfigApplicationContext
                 .getBean("realtorServiceImpl");
         realtorService.delete(realtorService.getById(69L));
-//        Region byId = region(Service.getById(5L);
+//        Region byId = service.region(Service.getById(5L);
 //        byId.setName("TESTa");
 //        regionService.update(byId);
 //        regionService.delete(byId);

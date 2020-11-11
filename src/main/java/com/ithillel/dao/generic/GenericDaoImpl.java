@@ -12,10 +12,10 @@ import javax.persistence.criteria.Root;
 public abstract class GenericDaoImpl<C, L> implements CustomDao<C, L> {
 
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
     @PersistenceUnit
-    private EntityManagerFactory entityManagerFactory;
-    private C instance;
+    protected EntityManagerFactory entityManagerFactory;
+    protected C instance;
 
     public GenericDaoImpl(C c) {
         this.instance = c;

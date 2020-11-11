@@ -1,14 +1,23 @@
-create table if not exists region (
+create table if not exists service.region (
     id bigserial primary key ,
     name varchar(100) not null,
-    create_date timestamp with time zone not null default current_timestamp,
+    create_date timestamp without time zone not null default current_timestamp,
     update_date timestamp without time zone not null default current_timestamp
 );
+
+SELECT *  from region
+where update_date between '2020-11-01 00:00:00.0'::timestamp
+and '2020-11-30 23:59:59.0'::timestamp;
+select "fasdfas"
+
+select (extract(epoch from create_date at TIME ZONE 'UTC') * 1000) from region;
+SELECT to_number(create_date) from region;
+select * from region where name = 'Одесса'
 create table if not exists area (
                         id bigserial primary key ,
                         name varchar(100) not null,
                         region_id bigint not null ,
-                        create_date timestamp with time zone not null default current_timestamp,
+                        create_date timestamp without time zone not null default current_timestamp,
                         update_date timestamp without time zone not null default current_timestamp
 );
 
@@ -16,21 +25,21 @@ create table if not exists district (
                           id bigserial primary key ,
                           name varchar(100) not null,
                           area_id bigint not null ,
-                          create_date timestamp with time zone not null default current_timestamp,
+                          create_date timestamp without time zone zone not null default current_timestamp,
                           update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists city (
                         id bigserial primary key ,
                         name varchar(100) not null,
                         district_id bigint not null ,
-                        create_date timestamp with time zone not null default current_timestamp,
+                        create_date timestamp without time zone zone not null default current_timestamp,
                         update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists estate_agency (
                       id bigserial primary key ,
                       name varchar(100) not null,
                       district_id bigint not null ,
-                      create_date timestamp with time zone not null default current_timestamp,
+                      create_date timestamp without time zone not null default current_timestamp,
                       update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists realtor (
@@ -38,13 +47,13 @@ create table if not exists realtor (
                                name varchar(100) not null,
                                surname varchar(100) not null,
                                experience_in_years int not null,
-                               create_date timestamp with time zone not null default current_timestamp,
+                               create_date timestamp without time zone not null default current_timestamp,
                                update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists real_property(
                               id bigserial primary key ,
                               name varchar(100) not null,
-                              create_date timestamp with time zone not null default current_timestamp,
+                              create_date timestamp without time zone not null default current_timestamp,
                               update_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists real_property_realtor
@@ -69,7 +78,7 @@ create table if not exists description
 )
 
 
-DELETE FROM region;
+DELETE FROM service.region;
 DELETE FROM city;
 DELETE FROM area;
 DELETE FROM district;

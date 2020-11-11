@@ -59,5 +59,13 @@ public class CustomModel implements GetId {
         this.id = id;
     }
 
-
+    @Override
+    public String toString() {
+        return "CustomModel{" +
+                "id=" + id +
+                ", updateDate=" + updateDate +
+                ", createDate=" + createDate +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

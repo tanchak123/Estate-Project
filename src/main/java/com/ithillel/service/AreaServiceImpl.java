@@ -10,11 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class AreaServiceImpl extends GenericServiceImpl<Area, Long> implements AreaService {
 
-    private AreaDao areaDao;
-
     @Autowired
     public AreaServiceImpl(AreaDao areaDao) {
         super(areaDao);
-        this.areaDao = areaDao;
     }
 }

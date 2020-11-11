@@ -10,7 +10,7 @@ import org.springframework.util.Assert;
 @Transactional(propagation = Propagation.REQUIRED)
 public abstract class GenericServiceImpl<C, L> implements CustomService<C, L> {
 
-    private final CustomDao<C, L> customDao;
+    protected final CustomDao<C, L> customDao;
 
     public GenericServiceImpl(final CustomDao<C, L> customDao) {
         this.customDao = customDao;

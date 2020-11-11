@@ -1,10 +1,9 @@
+package service;
+
 import com.ithillel.appcontext.ApplicationContext;
-import com.ithillel.model.EstateAgency;
-import com.ithillel.model.RealProperty;
 import com.ithillel.service.interfaces.*;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.util.Assert;
 
 public class ServiceTest {
 
