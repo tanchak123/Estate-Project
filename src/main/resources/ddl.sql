@@ -8,8 +8,8 @@ create table if not exists service.region (
 SELECT *  from region
 where update_date between '2020-11-01 00:00:00.0'::timestamp
 and '2020-11-30 23:59:59.0'::timestamp;
-select "fasdfas"
-
+select "fasdfas";
+           select region0_.id as id1_8_, region0_.create_date as create_d2_8_, region0_.name as name3_8_, region0_.update_date as update_d4_8_ from region region0_ where region0_.update_date between '2020-11-01 00:00:00.0' and '2020-11-30 23:59:59.0'
 select (extract(epoch from create_date at TIME ZONE 'UTC') * 1000) from region;
 SELECT to_number(create_date) from region;
 select * from region where name = 'Одесса'

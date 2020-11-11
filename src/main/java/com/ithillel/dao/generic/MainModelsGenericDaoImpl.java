@@ -6,6 +6,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 public class MainModelsGenericDaoImpl<C, L> extends GenericDaoImpl<C, L> {
@@ -42,7 +43,8 @@ public class MainModelsGenericDaoImpl<C, L> extends GenericDaoImpl<C, L> {
         Root<C> root = (Root<C>) criteriaQuery.from(instance.getClass());
         criteriaQuery
                 .select(root)
-                .where(criteriaBuilder.between(root.get(valueName), from, too));
+                .where(criteriaBuilder.between(
+                        root.get(valueName), from.getTime() ,too.getTime()));
         return entityManager.createQuery(criteriaQuery).getResultList();
     }
 }

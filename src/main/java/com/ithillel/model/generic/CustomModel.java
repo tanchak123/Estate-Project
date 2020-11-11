@@ -15,30 +15,30 @@ public class CustomModel implements GetId {
 
     @Column(name = "update_date")
     @Convert(converter = UpdateTimeStampConverter.class)
-    private Timestamp updateDate;
+    private Long updateDate;
 
     @Column(name = "create_date")
     @Convert(converter = CreateTimeStampConverter.class)
-    private Timestamp createDate;
+    private Long createDate;
 
 //    @Embedded()
 //    CustomDescription description;
 
     private String name;
 
-    public Timestamp getUpdateDate() {
+    public Long getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Timestamp updateDate) {
+    public void setUpdateDate(Long updateDate) {
         this.updateDate = updateDate;
     }
 
-    public Timestamp getCreateDate() {
+    public Long getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Timestamp createDate) {
+    public void setCreateDate(Long createDate) {
         this.createDate = createDate;
     }
 

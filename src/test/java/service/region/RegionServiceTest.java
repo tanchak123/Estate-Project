@@ -36,16 +36,18 @@ public class RegionServiceTest extends ServiceTest {
 
     @Test
     public void getByCriteria() {
-        regionService.getBetWeen("id", 10L, 30L)
-                .forEach(region -> System.out.println(region.toString()));
+//        regionService.getBetWeen("id", 10L, 30L)
+//                .forEach(region -> System.out.println(region.toString()));
         LocalDateTime localDateTime = LocalDateTime.of(
                 2020, 11, 1, 0, 0, 0);
         LocalDateTime localDateTime1 = LocalDateTime.of(
                 2020, 11, 30, 23, 59, 59);
-        regionService.getBetWeenTimeStamp("updateDate", Timestamp.from(localDateTime
-                        .toInstant(OffsetDateTime.now().getOffset()))
-                , Timestamp.from(localDateTime1
-                        .toInstant(OffsetDateTime.now().getOffset())))
+        Timestamp timestamp = Timestamp.from(localDateTime
+                        .toInstant(OffsetDateTime.now().getOffset()));
+        Timestamp timestamp1 = Timestamp.from(localDateTime1
+                .toInstant(OffsetDateTime.now().getOffset()));
+        regionService.getBetWeenTimeStamp("createDate", timestamp
+                , timestamp1)
                 .forEach(region -> System.out.println(region.toString()));
     }
 }

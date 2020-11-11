@@ -6,10 +6,10 @@ import java.util.Objects;
 
 public class CreateTimeStampConverter extends UpdateTimeStampConverter {
     @Override
-    public Timestamp convertToDatabaseColumn(Timestamp timestamp) {
-        if (Objects.isNull(timestamp)) {
-            timestamp = Timestamp.from(Instant.now());
+    public Timestamp convertToDatabaseColumn(Long longTime) {
+        if (Objects.isNull(longTime)) {
+            longTime = Timestamp.from(Instant.now()).getTime();
         }
-        return timestamp;
+        return Timestamp.from(Instant.ofEpochMilli(longTime));
     }
 }

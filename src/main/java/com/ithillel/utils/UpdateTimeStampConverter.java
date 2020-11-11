@@ -4,23 +4,22 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.Objects;
 import javax.persistence.AttributeConverter;
-import javax.persistence.Converter;
 
-public class UpdateTimeStampConverter implements AttributeConverter<Timestamp, Timestamp> {
+public class UpdateTimeStampConverter implements AttributeConverter<Long, Timestamp> {
 
     @Override
-    public Timestamp convertToDatabaseColumn(Timestamp timestamp) {
+    public Timestamp convertToDatabaseColumn(Long timestamp) {
         if (Objects.isNull(timestamp)) {
-            timestamp = Timestamp.from(Instant.now());
+            return Timestamp.from(Instant.now());
         }
-        return timestamp;
+        return Timestamp.from(Instant.ofEpochMilli(timestamp));
     }
 
     @Override
-    public Timestamp convertToEntityAttribute(Timestamp timestamp) {
+    public Long convertToEntityAttribute(Timestamp timestamp) {
         if (Objects.isNull(timestamp)) {
-            return null;
+            return Timestamp.from(Instant.now()).getTime();
         }
-        return timestamp;
+        return timestamp.getTime();
     }
 }
