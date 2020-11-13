@@ -9,6 +9,7 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
+import java.util.Objects;
 
 @Component
 @Entity
@@ -29,5 +30,18 @@ public class Region extends CustomModel {
 
     public void setArea(Area area) {
         this.area = area;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Region region = (Region) o;
+        return Objects.equals(area, region.area);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(area);
     }
 }

@@ -11,5 +11,5 @@ public interface RegionService extends CustomService<Region, Long> {
 
     List<Region> getBetWeen(String columnName, Long from, Long too);
 
-    List<Region> getBetWeenTimeStamp(String valueName, Timestamp from, Timestamp too);
+    List<Region> getBetweenTimeStamp(String valueName, Timestamp from, Timestamp too);
 }

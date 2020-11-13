@@ -1,7 +1,10 @@
 package com.ithillel.model;
 
 import com.ithillel.model.generic.CustomModel;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -22,7 +25,7 @@ public class Area extends CustomModel {
     private Region region;
 
     @OneToMany(mappedBy = "area", cascade = CascadeType.ALL)
-    private List<District> districts;
+    private List<District> districts = new ArrayList<>();
 
     public Area() {
     }
@@ -41,5 +44,19 @@ public class Area extends CustomModel {
 
     public void setDistricts(List<District> districts) {
         this.districts = districts;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Area area = (Area) o;
+        return Objects.equals(region, area.region) &&
+                Objects.equals(districts, area.districts);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(region, districts);
     }
 }

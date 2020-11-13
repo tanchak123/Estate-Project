@@ -3,6 +3,7 @@ package com.ithillel.model;
 import com.ithillel.model.description.CustomDescription;
 import com.ithillel.model.generic.CustomModel;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
@@ -27,5 +28,18 @@ public class RealProperty extends CustomModel {
 
     public void setRealtors(List<Realtor> realtors) {
         this.realtors = realtors;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        RealProperty that = (RealProperty) o;
+        return Objects.equals(realtors, that.realtors);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(realtors);
     }
 }

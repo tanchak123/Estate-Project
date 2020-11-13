@@ -4,8 +4,6 @@ import com.ithillel.dao.interfaces.RealtorDao;
 import com.ithillel.model.EstateAgency;
 import com.ithillel.model.RealProperty;
 import com.ithillel.model.Realtor;
-import com.ithillel.model.generic.CustomModel;
-import com.ithillel.model.generic.GetId;
 import com.ithillel.service.generic.GenericServiceImpl;
 import com.ithillel.service.interfaces.RealtorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +28,7 @@ public class RealtorServiceImpl extends GenericServiceImpl<Realtor, Long> implem
     public Realtor delete(Realtor realtor) {
         realtor = getById(realtor.getId());
         clearEstateAgencies(realtor.getEstateAgency(), realtor);
-        clearRealProperties(realtor.getPropertyList(), realtor);
+        clearRealProperties(realtor.getRealPropertyList(), realtor);
         customDao.update(realtor);
         return customDao.delete(realtor);
     }
@@ -49,6 +47,7 @@ public class RealtorServiceImpl extends GenericServiceImpl<Realtor, Long> implem
         realtor.setEstateAgency(null);
     }
 
+
     private void clearRealProperties(List<RealProperty> realPropertyList, Realtor realtor) {
         for (RealProperty realProperty : realPropertyList) {
             List<Realtor> realtors = realProperty.getRealtors();
@@ -60,6 +59,6 @@ public class RealtorServiceImpl extends GenericServiceImpl<Realtor, Long> implem
             }
             realProperty.setRealtors(result);
         }
-        realtor.setPropertyList(null);
+        realtor.setRealPropertyList(null);
     }
 }

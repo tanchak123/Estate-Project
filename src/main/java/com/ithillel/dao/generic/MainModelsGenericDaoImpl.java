@@ -2,11 +2,12 @@ package com.ithillel.dao.generic;
 
 import com.ithillel.model.Region;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 public class MainModelsGenericDaoImpl<C, L> extends GenericDaoImpl<C, L> {
@@ -27,24 +28,29 @@ public class MainModelsGenericDaoImpl<C, L> extends GenericDaoImpl<C, L> {
 
     public List<C> getBetWeen(String valueName, Long from, Long too) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<C> criteriaQuery = (CriteriaQuery<C>) criteriaBuilder.createQuery(
-                instance.getClass());
-        Root<C> root = (Root<C>) criteriaQuery.from(instance.getClass());
-        criteriaQuery
-                .select(root)
-                .where(criteriaBuilder.between(root.get(valueName), from, too));
-        return entityManager.createQuery(criteriaQuery).getResultList();
+        CriteriaQuery<C> criteriaQuery = (CriteriaQuery<C>)
+                criteriaBuilder.createQuery(instance.getClass());
+        Root<C> root = (Root<C>)criteriaQuery.from(instance.getClass());
+        ParameterExpression<Long> pStart = criteriaBuilder.parameter(Long.class);
+        ParameterExpression<Long> pEnd = criteriaBuilder.parameter(Long.class);
+        criteriaQuery.select(root).where(criteriaBuilder.between(root.get(valueName), pStart, pEnd));
+        return entityManager.createQuery(criteriaQuery).
+                setParameter(pStart, from).setParameter(pEnd, too).getResultList();
     }
 
-    public List<C> getBetWeenTimeStamp(String valueName, Timestamp from, Timestamp too) {
+    public List<C> getBetweenTimeStamp(String valueName, Timestamp from, Timestamp too) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<C> criteriaQuery = (CriteriaQuery<C>) criteriaBuilder.createQuery(
                 instance.getClass());
         Root<C> root = (Root<C>) criteriaQuery.from(instance.getClass());
-        criteriaQuery
-                .select(root)
-                .where(criteriaBuilder.between(
-                        root.get(valueName), from.getTime() ,too.getTime()));
-        return entityManager.createQuery(criteriaQuery).getResultList();
+        ParameterExpression<Long> pStart = criteriaBuilder.parameter(Long.class);
+        ParameterExpression<Long> pEnd = criteriaBuilder.parameter(Long.class);
+        criteriaQuery.select(root)
+                .where(criteriaBuilder.between(root.get(valueName), pStart, pEnd));
+        TypedQuery<C> query = entityManager.createQuery(criteriaQuery)
+        .setParameter(pStart, from.getTime())
+        .setParameter(pEnd, too.getTime());
+//        criteriaBuilder.between(root.get(valueName), pStart, pEnd);
+        return query.getResultList();
     }
 }

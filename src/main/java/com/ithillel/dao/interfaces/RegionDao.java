@@ -12,5 +12,5 @@ public interface RegionDao extends CustomDao<Region, Long> {
 
     List<Region> getBetWeen(String columnName, Long from, Long to);
 
-    List<Region> getBetWeenTimeStamp(String valueName, Timestamp from, Timestamp too);
+    List<Region> getBetweenTimeStamp(String valueName, Timestamp from, Timestamp too);
 }

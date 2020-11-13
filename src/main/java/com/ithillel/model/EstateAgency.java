@@ -1,7 +1,10 @@
 package com.ithillel.model;
 
 import com.ithillel.model.generic.CustomModel;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -26,7 +29,7 @@ public class EstateAgency extends CustomModel {
             },
             inverseJoinColumns = {@JoinColumn(name = "realtor_id")}
     )
-    private List<Realtor> realtorList;
+    private List<Realtor> realtorList = new ArrayList<>();
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "district_id")
@@ -46,5 +49,19 @@ public class EstateAgency extends CustomModel {
 
     public void setDistrict(District district) {
         this.district = district;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EstateAgency that = (EstateAgency) o;
+        return Objects.equals(realtorList, that.realtorList) &&
+                Objects.equals(district, that.district);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(realtorList, district);
     }
 }
