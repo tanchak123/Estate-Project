@@ -16,49 +16,49 @@ import java.util.List;
 @Service
 public class RealtorServiceImpl extends GenericServiceImpl<Realtor, Long> implements RealtorService {
 
+    RealtorDao realtorDao;
 
     @Autowired
     public RealtorServiceImpl(RealtorDao realtorDao) {
         super(realtorDao);
+        this.realtorDao = realtorDao;
     }
 
 
-    @Override
-    @Transactional
-    public Realtor delete(Realtor realtor) {
-        realtor = getById(realtor.getId());
-        clearEstateAgencies(realtor.getEstateAgency(), realtor);
-        clearRealProperties(realtor.getRealPropertyList(), realtor);
-        customDao.update(realtor);
-        return customDao.delete(realtor);
-    }
-
-    private void clearEstateAgencies(List<EstateAgency> estateAgencies, Realtor realtor) {
-        for (EstateAgency eA : estateAgencies) {
-            List<Realtor> realtorList = eA.getRealtorList();
-            List<Realtor> result = new ArrayList<>();
-            for (Realtor rl : realtorList) {
-                if (!rl.getId().equals(realtor.getId())) {
-                    result.add(rl);
-                }
-            }
-            eA.setRealtorList(result);
-        }
-        realtor.setEstateAgency(null);
-    }
-
-
-    private void clearRealProperties(List<RealProperty> realPropertyList, Realtor realtor) {
-        for (RealProperty realProperty : realPropertyList) {
-            List<Realtor> realtors = realProperty.getRealtors();
-            List<Realtor> result = new ArrayList<>();
-            for (Realtor rp : realtors) {
-                if (!rp.getId().equals(realtor.getId())) {
-                    result.add(rp);
-                }
-            }
-            realProperty.setRealtors(result);
-        }
-        realtor.setRealPropertyList(null);
-    }
+//    @Override
+//    @Transactional
+//    public Realtor delete(Realtor realtor) {
+//        realtor = getById(realtor.getId());
+//        clearEstateAgencies(realtor.getEstateAgencyList(), realtor);
+//        clearRealProperties(realtor.getRealPropertyList(), realtor);
+//        System.out.println("TRUE DELETE");
+//        return realtorDao.delete(realtor);
+//    }
+//
+//    private void clearEstateAgencies(List<EstateAgency> estateAgencies, Realtor realtor) {
+//        for (EstateAgency eA : estateAgencies) {
+//            List<Realtor> realtorList = eA.getRealtorList();
+//            List<Realtor> result = new ArrayList<>();
+//            for (Realtor rl : realtorList) {
+//                if (!rl.getId().equals(realtor.getId())) {
+//                    result.add(rl);
+//                }
+//            }
+//            eA.setRealtorList(result);
+//        }
+//    }
+//
+//
+//    private void clearRealProperties(List<RealProperty> realPropertyList, Realtor realtor) {
+//        for (RealProperty realProperty : realPropertyList) {
+//            List<Realtor> realtors = realProperty.getRealtors();
+//            List<Realtor> result = new ArrayList<>();
+//            for (Realtor rp : realtors) {
+//                if (!rp.getId().equals(realtor.getId())) {
+//                    result.add(rp);
+//                }
+//            }
+//            realProperty.setRealtors(result);
+//        }
+//    }
 }

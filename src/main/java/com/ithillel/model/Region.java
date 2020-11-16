@@ -7,8 +7,6 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
-
-import java.time.Instant;
 import java.util.Objects;
 
 @Component
@@ -43,5 +41,16 @@ public class Region extends CustomModel {
     @Override
     public int hashCode() {
         return Objects.hash(area);
+    }
+
+    @Override
+    public String toString() {
+        return "Region{" +
+                "area=" + area +
+                ", id=" + id +
+                ", updateDate=" + updateDate +
+                ", createDate=" + createDate +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

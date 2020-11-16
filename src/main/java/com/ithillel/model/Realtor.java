@@ -15,9 +15,9 @@ import org.springframework.stereotype.Component;
 public class Realtor extends CustomModel {
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "realtorList")
-    private List<EstateAgency> estateAgency = new ArrayList<>();
+    private List<EstateAgency> estateAgencyList = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "realtors")
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "realtorList")
     private List<RealProperty> realPropertyList = new ArrayList<>();
 
     @Column(name = "surname")
@@ -42,12 +42,16 @@ public class Realtor extends CustomModel {
         this.experience = experience;
     }
 
-    public List<EstateAgency> getEstateAgency() {
-        return estateAgency;
+    public List<EstateAgency> getEstateAgencyList() {
+        return estateAgencyList;
     }
 
-    public void setEstateAgency(List<EstateAgency> estateAgency) {
-        this.estateAgency = estateAgency;
+    public void setEstateAgencyList(List<EstateAgency> estateAgencyList) {
+        this.estateAgencyList = estateAgencyList;
+    }
+
+    public void addEstateAgencyList(List<EstateAgency> estateAgency) {
+        this.estateAgencyList.addAll(estateAgency);
     }
 
     public List<RealProperty> getRealPropertyList() {
@@ -55,7 +59,11 @@ public class Realtor extends CustomModel {
     }
 
     public void setRealPropertyList(List<RealProperty> propertyList) {
-        this.realPropertyList = propertyList;
+        this.realPropertyList  = propertyList;
+    }
+
+    public void addRealPropertyList(List<RealProperty> propertyList) {
+        this.realPropertyList.addAll(propertyList);
     }
 
     @Override
@@ -66,7 +74,7 @@ public class Realtor extends CustomModel {
         Realtor realtor = (Realtor) o;
 
         if (experience != realtor.experience) return false;
-        if (estateAgency != null ? !estateAgency.equals(realtor.estateAgency) : realtor.estateAgency != null)
+        if (estateAgencyList != null ? !estateAgencyList.equals(realtor.estateAgencyList) : realtor.estateAgencyList != null)
             return false;
         if (realPropertyList != null ? !realPropertyList.equals(realtor.realPropertyList) : realtor.realPropertyList != null)
             return false;
@@ -75,7 +83,7 @@ public class Realtor extends CustomModel {
 
     @Override
     public int hashCode() {
-        int result = estateAgency != null ? estateAgency.hashCode() : 0;
+        int result = estateAgencyList != null ? estateAgencyList.hashCode() : 0;
         result = 31 * result + (realPropertyList != null ? realPropertyList.hashCode() : 0);
         result = 31 * result + (surName != null ? surName.hashCode() : 0);
         result = 31 * result + experience;

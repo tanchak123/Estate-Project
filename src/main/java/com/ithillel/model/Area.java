@@ -25,7 +25,7 @@ public class Area extends CustomModel {
     private Region region;
 
     @OneToMany(mappedBy = "area", cascade = CascadeType.ALL)
-    private List<District> districts = new ArrayList<>();
+    private List<District> districtList = new ArrayList<>();
 
     public Area() {
     }
@@ -38,12 +38,12 @@ public class Area extends CustomModel {
         this.region = region;
     }
 
-    public List<District> getDistricts() {
-        return districts;
+    public List<District> getDistrictList() {
+        return districtList;
     }
 
-    public void setDistricts(List<District> districts) {
-        this.districts = districts;
+    public void setDistrictList(List<District> districts) {
+        this.districtList = districts;
     }
 
     @Override
@@ -52,11 +52,11 @@ public class Area extends CustomModel {
         if (o == null || getClass() != o.getClass()) return false;
         Area area = (Area) o;
         return Objects.equals(region, area.region) &&
-                Objects.equals(districts, area.districts);
+                Objects.equals(districtList, area.districtList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(region, districts);
+        return Objects.hash(region, districtList);
     }
 }

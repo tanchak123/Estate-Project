@@ -43,13 +43,13 @@ public class MainModelsGenericDaoImpl<C, L> extends GenericDaoImpl<C, L> {
         CriteriaQuery<C> criteriaQuery = (CriteriaQuery<C>) criteriaBuilder.createQuery(
                 instance.getClass());
         Root<C> root = (Root<C>) criteriaQuery.from(instance.getClass());
-        ParameterExpression<Long> pStart = criteriaBuilder.parameter(Long.class);
-        ParameterExpression<Long> pEnd = criteriaBuilder.parameter(Long.class);
+        ParameterExpression<Timestamp> pStart = criteriaBuilder.parameter(Timestamp.class);
+        ParameterExpression<Timestamp> pEnd = criteriaBuilder.parameter(Timestamp.class);
         criteriaQuery.select(root)
                 .where(criteriaBuilder.between(root.get(valueName), pStart, pEnd));
         TypedQuery<C> query = entityManager.createQuery(criteriaQuery)
-        .setParameter(pStart, from.getTime())
-        .setParameter(pEnd, too.getTime());
+        .setParameter(pStart, from)
+        .setParameter(pEnd, too);
 //        criteriaBuilder.between(root.get(valueName), pStart, pEnd);
         return query.getResultList();
     }

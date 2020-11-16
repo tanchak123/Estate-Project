@@ -1,6 +1,5 @@
 package com.ithillel.model;
 
-import com.ithillel.model.description.CustomDescription;
 import com.ithillel.model.generic.CustomModel;
 import java.util.List;
 import java.util.Objects;
@@ -20,14 +19,14 @@ public class RealProperty extends CustomModel {
             inverseJoinColumns = @JoinColumn(name = "real_property_id", referencedColumnName = "id")
 
     )
-    private List<Realtor> realtors;
+    private List<Realtor> realtorList;
 
-    public List<Realtor> getRealtors() {
-        return realtors;
+    public List<Realtor> getRealtorList() {
+        return realtorList;
     }
 
-    public void setRealtors(List<Realtor> realtors) {
-        this.realtors = realtors;
+    public void setRealtorList(List<Realtor> realtors) {
+        this.realtorList = realtors;
     }
 
     @Override
@@ -35,11 +34,11 @@ public class RealProperty extends CustomModel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RealProperty that = (RealProperty) o;
-        return Objects.equals(realtors, that.realtors);
+        return Objects.equals(realtorList, that.realtorList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(realtors);
+        return Objects.hash(realtorList);
     }
 }

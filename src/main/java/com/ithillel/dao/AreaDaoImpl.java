@@ -29,7 +29,7 @@ public class AreaDaoImpl implements AreaDao {
     @Override
     public Area get(Long id) {
         Area area = entityManager.find(Area.class, Integer.valueOf(String.valueOf(id)));
-        area.getDistricts().size();
+        area.getDistrictList().size();
         return area;
 
     }

@@ -11,20 +11,20 @@ public class CustomModel implements GetId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_name")
-    private Long id;
+    protected Long id;
 
     @Column(name = "update_date")
     @Convert(converter = UpdateTimeStampConverter.class)
-    private Long updateDate;
+    protected Long updateDate;
 
     @Column(name = "create_date")
     @Convert(converter = CreateTimeStampConverter.class)
-    private Long createDate;
+    protected Long createDate;
 
 //    @Embedded()
 //    CustomDescription description;
 
-    private String name;
+    protected String name;
 
     public Long getUpdateDate() {
         return updateDate;

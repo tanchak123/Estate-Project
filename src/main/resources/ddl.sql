@@ -1,4 +1,4 @@
-create table if not exists service.region (
+create table if not exists region (
     id bigserial primary key ,
     name varchar(100) not null,
     create_date timestamp without time zone not null default current_timestamp,
