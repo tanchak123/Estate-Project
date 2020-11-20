@@ -10,7 +10,11 @@ public interface CustomService<C, L> {
 
     C updateById(L l);
 
-    C getById(L l);
+    C eagerGetById(L l);
+
+    C getById(final L id);
+
+    C cascadeDelete(final C c);
 
     C delete(C c);
 

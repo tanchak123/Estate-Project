@@ -1,17 +1,12 @@
 package com.ithillel.service.generic;
 
-import com.ithillel.appcontext.ApplicationContext;
 import com.ithillel.dao.generic.CustomDao;
-import com.ithillel.model.EstateAgency;
-import com.ithillel.model.Realtor;
+import com.ithillel.model.generic.CustomModel;
 import com.ithillel.model.generic.GetId;
 import java.lang.reflect.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import com.ithillel.service.interfaces.RealtorService;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -28,39 +23,72 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L> {
 
     @Override
     public C create(final C c) {
-        Assert.notNull(c, "Can't get instance = " + c);
+        Assert.notNull(c, "instance is null");
         return customDao.create(c);
     }
 
     @Override
     public C deleteById(final L id) {
+        Assert.notNull(id, "id is null");
         C instance = getById(id);
-        Assert.notNull(id, "Can't get instance with id = " + id);
         return delete(instance);
     }
 
     @Override
     public C updateById(final L id) {
-        Assert.notNull(id, "Can't get instance with id = " + id);
+        Assert.notNull(id, "id is null");
         return customDao.update(getById(id));
     }
 
     @Override
     @Transactional(readOnly = true)
     public C getById(final L id) {
+        Assert.notNull(id, "Id is null");
         C instance = customDao.get(id);
         Assert.notNull(instance, "Can't get instance with id = " + id);
         return instance;
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public C eagerGetById(final L id) {
+        Assert.notNull(id, "Id is " + id);
+        C instance = getById(id);
+        Assert.notNull(instance, "Can't get instance with id = " + id);
+            Field[] fields1 = instance.getClass().getDeclaredFields();
+            for (Field field : fields1) {
+                String fieldName = field.getName();
+                if (fieldName.endsWith("List")) {
+                    field.setAccessible(true);
+                    try {
+                        List<? super CustomModel> list = new ArrayList<>
+                                ((Collection<? super CustomModel>) field.get(instance));
+                        list.size();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        return instance;
+    }
+
+    @Override
     public C delete(final C c) {
-        Assert.notNull(c, "Can't delete instance = " + c);
+        Assert.notNull(c, "instance is null");
         GetId getId = (GetId) c;
         C instance = getById((L) getId.getId());
         System.out.println(instance.toString());
-        cascadeDelete(instance);
-        return customDao.delete(c);
+        return customDao.delete(instance);
+    }
+
+    @Override
+    public C cascadeDelete(final C c) {
+        Assert.notNull(c, "instance is null");
+        GetId getId = (GetId) c;
+        C instance = getById((L) getId.getId());
+        System.out.println(instance.toString());
+        cascadeDeleteFunction(instance);
+        return customDao.delete(instance);
     }
 
     @Override
@@ -75,7 +103,8 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L> {
         return customDao.getAll();
     }
 
-    private static <V>ArrayList getList(final V instance, final String mainModelName) throws IllegalAccessException {
+    private static <V>ArrayList getGenericList(final V instance, final String mainModelName)
+            throws IllegalAccessException {
         Field[] fields1 = instance.getClass().getDeclaredFields();
         for (Field field : fields1) {
             char zeroCharName = mainModelName.charAt(0);
@@ -92,7 +121,7 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L> {
     }
 
 
-    private <V>void cascadeDelete(final C instance) {
+    private <V>void cascadeDeleteFunction(final C instance) {
         String name = instance.getClass().getSimpleName();
         try {
             Field[] fields = instance.getClass().getDeclaredFields();
@@ -103,7 +132,8 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L> {
                     field.setAccessible(true);
                     List<V> innerList = new ArrayList<>((Collection<? extends V>) field.get(instance));
                     for (V innerInstance : innerList) {
-                        ArrayList<C> innerInstanceList = getList(innerInstance, name);
+                        System.out.println(innerInstance);
+                        ArrayList<C> innerInstanceList = getGenericList(innerInstance, name);
                         ArrayList<C> result = new ArrayList<>();
                         for (C instanceList : innerInstanceList) {
                             GetId insId = (GetId) instance;
@@ -130,20 +160,5 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L> {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) throws IllegalAccessException {
-        AnnotationConfigApplicationContext annotationConfigApplicationContext =
-                new AnnotationConfigApplicationContext(ApplicationContext.class);
-        RealtorService realtorService = (RealtorService)
-                annotationConfigApplicationContext.getBean("realtorServiceImpl");
-        Realtor realtor = realtorService.getById(27L);
-        Field[] fields = realtor.getClass().getDeclaredFields();
-        for (Field field : fields) {
-            System.out.println(field.getDeclaringClass());
-            field.setAccessible(true);
-            System.out.println(field.get(realtor));
-        }
-
     }
 }

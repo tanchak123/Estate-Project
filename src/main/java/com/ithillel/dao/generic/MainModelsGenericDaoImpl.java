@@ -1,16 +1,10 @@
 package com.ithillel.dao.generic;
-
-import com.ithillel.model.Region;
-
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.List;
 
-public class MainModelsGenericDaoImpl<C, L> extends GenericDaoImpl<C, L> {
+public abstract class MainModelsGenericDaoImpl<C, L> extends GenericDaoImpl<C, L> {
 
     public MainModelsGenericDaoImpl(C c) {
         super(c);
