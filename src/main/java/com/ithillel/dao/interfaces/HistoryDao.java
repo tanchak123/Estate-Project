@@ -8,4 +8,8 @@ import java.sql.Timestamp;
 public interface HistoryDao extends CustomDao<History, Long> {
 
     void callDeleteProcedure(Timestamp date);
+
+    void callDeleteProcedureNative(Timestamp date);
+
+    void callDeleteProcedureTemplate(Timestamp date);
 }

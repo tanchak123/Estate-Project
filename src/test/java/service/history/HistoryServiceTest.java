@@ -75,8 +75,14 @@ public class HistoryServiceTest extends ServiceTest {
     public void callDeleteProcedure() {
         LocalDateTime localDateTime = LocalDateTime.of(
                 2020, 11, 19, 14, 38, 4);
+        LocalDateTime localDateTime1 = LocalDateTime.of(
+                2020, 11, 19, 14, 41, 4);
         Timestamp timestamp = Timestamp.from(localDateTime
                 .toInstant(OffsetDateTime.now().getOffset()));
+        Timestamp timestamp1 = Timestamp.from(localDateTime1
+                .toInstant(OffsetDateTime.now().getOffset()));
         historyService.callDeleteProcedure(timestamp);
+        historyService.callDeleteProcedureNative(timestamp1);
+        historyService.callDeleteProcedureTemplate(timestamp);
     }
 }

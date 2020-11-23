@@ -2,14 +2,23 @@ package com.ithillel.model.history;
 
 import com.ithillel.model.Client;
 import com.ithillel.utils.CreateTimeStampConverter;
+import jdk.jfr.BooleanFlag;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 
 @Component
 @Entity
 @Table(name = "History")
 @SequenceGenerator(name = "seq_name", sequenceName = "history_id_seq", allocationSize = 1)
+@NamedStoredProcedureQuery(
+        name = "deleteHistoryByDate",
+        procedureName = "delete_all_by_date",
+        parameters = {
+                @StoredProcedureParameter(type = Timestamp.class, mode = ParameterMode.IN),
+        }
+)
 public class History {
 
     @Id

@@ -27,4 +27,14 @@ public class HistoryServiceImpl extends GenericServiceImpl<History, Long> implem
     public void callDeleteProcedure(Timestamp date) {
         historyDao.callDeleteProcedure(date);
     }
+
+    @Override
+    public void callDeleteProcedureNative(Timestamp date) {
+        historyDao.callDeleteProcedureNative(date);
+    }
+
+    @Override
+    public void callDeleteProcedureTemplate(Timestamp date) {
+        historyDao.callDeleteProcedureTemplate(date);
+    }
 }

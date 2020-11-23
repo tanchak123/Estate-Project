@@ -120,14 +120,25 @@ alter sequence district_id_seq restart 1;
 alter sequence area_id_seq restart 1;
 alter sequence region_id_seq restart 1;
 
-create or replace procedure delete_all_by_date(given_date timestamp without time zone)
-    LANGUAGE sql
-    AS $$
-    DELETE FROM history_detail where history_id in (
-    SELECT history.id FROM HISTORY WHERE history.create_date < given_date
+create function delete_all_by_date(given_date timestamp without time zone) returns boolean
+    language plpgsql
+as
+$$
+DECLARE
+    passed BOOLEAN;
+begin
+    DELETE
+    FROM history_detail
+    where history_id in (
+        SELECT history.id
+        FROM HISTORY
+        WHERE history.create_date < given_date
     );
     DELETE from history where create_date < given_date;
-    $$
-    ;
-drop procedure  delete_all_by_date(given_date history.create_date%type);
+    return passed;
+end
+$$;
+drop function  delete_all_by_date(given_date history.create_date%type);
 call delete_all_by_date('2020-11-19 14:38:01.603000'::timestamp without time zone);
+
+select * from delete_all_by_date('2020-11-19 14:38:01.603000'::timestamp without time zone);
