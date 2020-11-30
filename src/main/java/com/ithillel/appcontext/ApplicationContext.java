@@ -1,20 +1,9 @@
 package com.ithillel.appcontext;
 
-import com.ithillel.model.*;
-import com.ithillel.model.description.CustomDescription;
-import com.ithillel.service.interfaces.AreaService;
-import com.ithillel.service.interfaces.RealPropertyService;
-import com.ithillel.service.interfaces.RealtorService;
-import com.ithillel.service.interfaces.RegionService;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -40,10 +30,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
         @PropertySource("classpath:postgre.props"),
         @PropertySource("classpath:hibernate.props")})
 @EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "com.ithillel.dao",
+        repositoryImplementationPostfix = "Impl",
+        entityManagerFactoryRef = "emf")
 public class ApplicationContext {
 
     @Autowired
-    Environment env;
+    private Environment env;
 
     @Bean
     public LocalContainerEntityManagerFactoryBean emf() {

@@ -10,12 +10,8 @@ import org.junit.Test;
 import service.ServiceTest;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
-import java.util.Date;
-import java.util.logging.SimpleFormatter;
 
 public class HistoryServiceTest extends ServiceTest {
 
@@ -40,7 +36,7 @@ public class HistoryServiceTest extends ServiceTest {
         History history = new History();
         history.setHistory_level("TEST");
         history.setHistory_type("HIGH");
-        history.setCreate_date(System.currentTimeMillis());
+        history.setCreateDate(System.currentTimeMillis());
         ClientService clientService = (ClientService) annotationConfigApplicationContext
                 .getBean("clientServiceImpl");
         Client client = clientService.eagerGetById(6L);
@@ -74,15 +70,16 @@ public class HistoryServiceTest extends ServiceTest {
     @Test
     public void callDeleteProcedure() {
         LocalDateTime localDateTime = LocalDateTime.of(
-                2020, 11, 19, 14, 38, 4);
+                2020, 11, 19, 14, 42, 7);
         LocalDateTime localDateTime1 = LocalDateTime.of(
                 2020, 11, 19, 14, 41, 4);
         Timestamp timestamp = Timestamp.from(localDateTime
                 .toInstant(OffsetDateTime.now().getOffset()));
         Timestamp timestamp1 = Timestamp.from(localDateTime1
                 .toInstant(OffsetDateTime.now().getOffset()));
-        historyService.callDeleteProcedure(timestamp);
-        historyService.callDeleteProcedureNative(timestamp1);
-        historyService.callDeleteProcedureTemplate(timestamp);
+//        historyService.callDeleteProcedure(timestamp);
+//        historyService.callDeleteProcedureNative(timestamp1);
+//        historyService.callDeleteProcedureTemplate(timestamp);
+        historyService.deleteAllByCreateDateBefore(timestamp.getTime());
     }
 }

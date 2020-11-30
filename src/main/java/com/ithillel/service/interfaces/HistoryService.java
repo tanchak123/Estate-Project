@@ -7,9 +7,11 @@ import java.sql.Timestamp;
 
 public interface HistoryService extends CustomService<History, Long> {
 
-    void callDeleteProcedure(Timestamp date);
+//    void callDeleteProcedure(Timestamp date);
+//
+//    void callDeleteProcedureNative(Timestamp date);
+//
+//    void callDeleteProcedureTemplate(Timestamp date);
 
-    void callDeleteProcedureNative(Timestamp date);
-
-    void callDeleteProcedureTemplate(Timestamp date);
+    void deleteAllByCreateDateBefore(Long date);
 }

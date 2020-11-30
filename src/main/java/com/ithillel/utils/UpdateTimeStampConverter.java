@@ -12,7 +12,7 @@ public class UpdateTimeStampConverter implements AttributeConverter<Long, Timest
         if (Objects.isNull(timestamp)) {
             return Timestamp.from(Instant.now());
         }
-        return Timestamp.from(Instant.ofEpochMilli(timestamp));
+        return Timestamp.from(Instant.now());
     }
 
     @Override

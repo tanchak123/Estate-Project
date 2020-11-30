@@ -6,7 +6,7 @@ public interface CustomService<C, L> {
 
     C create(C c);
 
-    C deleteById(L l);
+    void deleteById(L l);
 
     C updateById(L l);
 
@@ -14,9 +14,9 @@ public interface CustomService<C, L> {
 
     C getById(final L id);
 
-    C cascadeDelete(final C c);
+    void cascadeDelete(final C c);
 
-    C delete(C c);
+    void delete(C c);
 
     C update(C c);
 

@@ -23,7 +23,7 @@ public class ClientServiceTest extends ServiceTest {
         History history = new History();
         history.setHistory_level("TEST");
         history.setHistory_type("HIGH");
-        history.setCreate_date(System.currentTimeMillis());
+        history.setCreateDate(System.currentTimeMillis());
 
         Client client = new Client();
         client.setLogin("test");

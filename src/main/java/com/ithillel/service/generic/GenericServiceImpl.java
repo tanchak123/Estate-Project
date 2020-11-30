@@ -7,6 +7,8 @@ import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -24,20 +26,20 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L> {
     @Override
     public C create(final C c) {
         Assert.notNull(c, "instance is null");
-        return customDao.create(c);
+        return customDao.save(c);
     }
 
     @Override
-    public C deleteById(final L id) {
+    public void deleteById(final L id) {
         Assert.notNull(id, "id is null");
         C instance = getById(id);
-        return delete(instance);
+        delete(instance);
     }
 
     @Override
     public C updateById(final L id) {
         Assert.notNull(id, "id is null");
-        return customDao.update(getById(id));
+        return customDao.save(getById(id));
     }
 
     @Override
@@ -73,28 +75,28 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L> {
     }
 
     @Override
-    public C delete(final C c) {
+    public void delete(final C c) {
         Assert.notNull(c, "instance is null");
         GetId getId = (GetId) c;
         C instance = getById((L) getId.getId());
         System.out.println(instance.toString());
-        return customDao.delete(instance);
+        customDao.delete(instance);
     }
 
     @Override
-    public C cascadeDelete(final C c) {
+    public void cascadeDelete(final C c) {
         Assert.notNull(c, "instance is null");
         GetId getId = (GetId) c;
         C instance = getById((L) getId.getId());
         System.out.println(instance.toString());
         cascadeDeleteFunction(instance);
-        return customDao.delete(instance);
+        customDao.delete(instance);
     }
 
     @Override
     public C update(final C c) {
         Assert.notNull(c, "Can't update instance = " + c);
-        return customDao.update(c);
+        return customDao.save(c);
     }
 
     @Override

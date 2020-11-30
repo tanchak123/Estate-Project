@@ -1,6 +1,5 @@
 package com.ithillel.service;
 
-import com.ithillel.dao.generic.CustomDao;
 import com.ithillel.dao.interfaces.HistoryDao;
 import com.ithillel.model.history.History;
 import com.ithillel.service.generic.GenericServiceImpl;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 
 @Service
 public class HistoryServiceImpl extends GenericServiceImpl<History, Long> implements HistoryService {
@@ -22,19 +22,25 @@ public class HistoryServiceImpl extends GenericServiceImpl<History, Long> implem
         this.historyDao = historyDao;
     }
 
-    @Override
+//    @Override
+//    @Transactional
+//    public void callDeleteProcedure(Timestamp date) {
+//        historyDao.callDeleteProcedure(date);
+//    }
+//
+//    @Override
+//    public void callDeleteProcedureNative(Timestamp date) {
+//        historyDao.callDeleteProcedureNative(date);
+//    }
+//
+//    @Override
+//    public void callDeleteProcedureTemplate(Timestamp date) {
+//        historyDao.callDeleteProcedureTemplate(date);
+//    }
+
     @Transactional
-    public void callDeleteProcedure(Timestamp date) {
-        historyDao.callDeleteProcedure(date);
-    }
-
     @Override
-    public void callDeleteProcedureNative(Timestamp date) {
-        historyDao.callDeleteProcedureNative(date);
-    }
-
-    @Override
-    public void callDeleteProcedureTemplate(Timestamp date) {
-        historyDao.callDeleteProcedureTemplate(date);
+    public void deleteAllByCreateDateBefore(Long date) {
+        historyDao.delete_all_by_date(Timestamp.from(Instant.ofEpochMilli(date)));
     }
 }

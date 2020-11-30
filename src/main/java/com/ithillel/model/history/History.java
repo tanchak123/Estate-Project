@@ -2,7 +2,6 @@ package com.ithillel.model.history;
 
 import com.ithillel.model.Client;
 import com.ithillel.utils.CreateTimeStampConverter;
-import jdk.jfr.BooleanFlag;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -27,7 +26,7 @@ public class History {
 
     @Column(name = "create_date")
     @Convert(converter = CreateTimeStampConverter.class)
-    private Long create_date;
+    private Long createDate;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "client_id", referencedColumnName = "id")
@@ -50,12 +49,12 @@ public class History {
         this.id = id;
     }
 
-    public Long getCreate_date() {
-        return create_date;
+    public Long getCreateDate() {
+        return createDate;
     }
 
-    public void setCreate_date(Long create_date) {
-        this.create_date = create_date;
+    public void setCreateDate(Long create_date) {
+        this.createDate = create_date;
     }
 
     public Client getClient() {

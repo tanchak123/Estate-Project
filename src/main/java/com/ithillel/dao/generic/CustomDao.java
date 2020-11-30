@@ -1,17 +1,27 @@
 package com.ithillel.dao.generic;
 
+import com.ithillel.model.history.History;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.NoRepositoryBean;
+import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 
-public interface CustomDao<C, L> {
+@NoRepositoryBean
+public interface CustomDao<C, L> extends CrudRepository<C, L> {
 
-    C create(C instance);
+//    <S extends C>  save(C instance);
 
-    public C get(L id);
+    @Query("from #{#entityName} c where c.id = :id")
+    C get(@Param("id") L id);
 
-    public List<C> getAll();
+    @Query("from #{#entityName}")
+    List<C> getAll();
 
-    public C update(C instance);
+    <S extends C> S save(S var1);
 
-    public C delete(C instance);
+    void delete(C instance);
 
 }

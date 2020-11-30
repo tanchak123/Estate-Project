@@ -3,6 +3,8 @@ import com.ithillel.model.*;
 import com.ithillel.service.interfaces.RegionService;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import service.ServiceTest;
 import java.sql.Timestamp;
 import java.time.*;
@@ -34,6 +36,7 @@ public class RegionServiceTest extends ServiceTest {
         Area area = new Area();
         area.setName("Area");
         area.setRegion(region);
+        region.setArea(area);
 
         District district = new District();
         district.setName("DistrictTest");
@@ -85,44 +88,58 @@ public class RegionServiceTest extends ServiceTest {
 
     @Test
     public void delete() {
-        regionService.deleteById(28L);
+        regionService.deleteById(14L);
     }
 
     @Test
     public void update() {
-        Region updated = regionService.getById(26L);
-        updated.setName("UPDATEDfromTest");
+        Region updated = regionService.getById(27L);
+        updated.setName("UPDATEDfromTesta");
         regionService.update(updated);
         String name = regionService.getById(updated.getId()).getName();
         Assert.assertEquals("Local model and database model not equals", name, updated.getName());
     }
 
     @Test
-    public void getAllSorted() {
-        regionService.getAllSorted("name")
-                .forEach(region -> System.out.println(region.getName()));
-        regionService.getAllSorted("id")
-                .forEach(region -> System.out.println(region.getId()));
-        regionService.getAllSorted("createDate")
-                .forEach(region -> System.out.println(region.getCreateDate()));
+    public void pageable() {
+        Page<Region> regions = regionService.getAllByValueOrderById("name", "Region", PageRequest.of(0, 3));
+        while (regions.hasNext()) {
+            for (Region region : regions.getContent()) {
+                System.out.println(region.getId());
+            }
+            regions = regionService.getAllByValueOrderById("name", "Region", regions.nextOrLastPageable());
+        }
+        for (Region region : regions.getContent()) {
+            System.out.println(region.getId());
+        }
     }
 
-    @Test
-    public void getByCriteria() {
-        regionService.getBetWeen("id", 10L, 30L)
-                .forEach(region -> System.out.println(region.toString()));
-        LocalDateTime localDateTime = LocalDateTime.of(
-                2020, 11, 11, 3, 5, 0);
-        LocalDateTime localDateTime1 = LocalDateTime.of(
-                2020, 11, 30, 23, 59, 59);
-        Timestamp timestamp = Timestamp.from(localDateTime
-                        .toInstant(OffsetDateTime.now().getOffset()));
-        Timestamp timestamp1 = Timestamp.from(localDateTime1
-                .toInstant(OffsetDateTime.now().getOffset()));
-        regionService.getBetWeen("createDate", timestamp.getTime()
-                , timestamp1.getTime())
-                .forEach(region -> System.out.println(region.toString()));
-    }
+//    @Test
+//    public void getAllSorted() {
+//        regionService.getAllSorted("name")
+//                .forEach(region -> System.out.println(region.getName()));
+//        regionService.getAllSorted("id")
+//                .forEach(region -> System.out.println(region.getId()));
+//        regionService.getAllSorted("createDate")
+//                .forEach(region -> System.out.println(region.getCreateDate()));
+//    }
+//
+//    @Test
+//    public void getByCriteria() {
+//        regionService.getBetWeen("id", 10L, 30L)
+//                .forEach(region -> System.out.println(region.toString()));
+//        LocalDateTime localDateTime = LocalDateTime.of(
+//                2020, 11, 11, 3, 5, 0);
+//        LocalDateTime localDateTime1 = LocalDateTime.of(
+//                2020, 11, 30, 23, 59, 59);
+//        Timestamp timestamp = Timestamp.from(localDateTime
+//                        .toInstant(OffsetDateTime.now().getOffset()));
+//        Timestamp timestamp1 = Timestamp.from(localDateTime1
+//                .toInstant(OffsetDateTime.now().getOffset()));
+//        regionService.getBetWeen("createDate", timestamp.getTime()
+//                , timestamp1.getTime())
+//                .forEach(region -> System.out.println(region.toString()));
+//    }
 
 
 //

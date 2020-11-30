@@ -124,8 +124,6 @@ create function delete_all_by_date(given_date timestamp without time zone) retur
     language plpgsql
 as
 $$
-DECLARE
-    passed BOOLEAN;
 begin
     DELETE
     FROM history_detail
@@ -135,10 +133,17 @@ begin
         WHERE history.create_date < given_date
     );
     DELETE from history where create_date < given_date;
-    return passed;
+    return true;
 end
 $$;
 drop function  delete_all_by_date(given_date history.create_date%type);
 call delete_all_by_date('2020-11-19 14:38:01.603000'::timestamp without time zone);
 
 select * from delete_all_by_date('2020-11-19 14:38:01.603000'::timestamp without time zone);
+
+select history0_.id as id1_6_, history0_.client_id as client_i5_6_, history0_.create_date as create_d2_6_, history0_.history_level as history_3_6_, history0_.history_type as history_4_6_ from History history0_
+where history0_.<1605789727000::timestamp
+
+
+
+SELEC
