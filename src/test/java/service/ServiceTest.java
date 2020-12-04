@@ -9,12 +9,6 @@ public class ServiceTest {
 
     protected static AnnotationConfigApplicationContext annotationConfigApplicationContext =
             new AnnotationConfigApplicationContext(ApplicationContext.class);
-    protected CityService cityService;
-    protected DistrictService districtService;
-    protected AreaService areaService;
-    protected EstateAgencyService estateAgencyService;
-    protected RealtorService realtorService;
-    protected RealPropertyService realPropertyService;
 
 
     @Test
@@ -23,15 +17,15 @@ public class ServiceTest {
                 .getBean("regionServiceImpl");
         annotationConfigApplicationContext
                 .getBean("realtorServiceImpl");
-        areaService = (AreaService) annotationConfigApplicationContext
+        annotationConfigApplicationContext
                 .getBean("areaServiceImpl");
         annotationConfigApplicationContext
                 .getBean("estateAgencyServiceImpl");
-        realPropertyService = (RealPropertyService) annotationConfigApplicationContext
+        annotationConfigApplicationContext
                 .getBean("realPropertyServiceImpl");
-        cityService = (CityService) annotationConfigApplicationContext
+        annotationConfigApplicationContext
                 .getBean("cityServiceImpl");
-        districtService = (DistrictService) annotationConfigApplicationContext
+        annotationConfigApplicationContext
                 .getBean("districtServiceImpl");
     }
 }

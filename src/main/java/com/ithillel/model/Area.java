@@ -24,7 +24,7 @@ public class Area extends CustomModel {
     @JoinColumn(name = "region_id", referencedColumnName = "id")
     private Region region;
 
-    @OneToMany(mappedBy = "area", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "area")
     private List<District> districtList = new ArrayList<>();
 
     public Area() {

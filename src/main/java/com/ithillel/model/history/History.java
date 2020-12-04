@@ -28,15 +28,15 @@ public class History {
     @Convert(converter = CreateTimeStampConverter.class)
     private Long createDate;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "client_id", referencedColumnName = "id")
     private Client client;
 
     @Column(name = "history_level")
-    private String history_level;
+    private String historyLevel;
 
     @Column(name = "history_type")
-    private String history_type;
+    private String historyType;
 
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "history")
     private HistoryDetail historyDetail;
@@ -65,20 +65,20 @@ public class History {
         this.client = client;
     }
 
-    public String getHistory_level() {
-        return history_level;
+    public String getHistoryLevel() {
+        return historyLevel;
     }
 
-    public void setHistory_level(String history_level) {
-        this.history_level = history_level;
+    public void setHistoryLevel(String history_level) {
+        this.historyLevel = history_level;
     }
 
-    public String getHistory_type() {
-        return history_type;
+    public String getHistoryType() {
+        return historyType;
     }
 
-    public void setHistory_type(String history_type) {
-        this.history_type = history_type;
+    public void setHistoryType(String history_type) {
+        this.historyType = history_type;
     }
 
     public HistoryDetail getHistoryDetail() {

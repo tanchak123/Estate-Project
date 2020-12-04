@@ -1,20 +1,15 @@
 package com.ithillel.dao.interfaces;
 
 import com.ithillel.dao.generic.CustomDao;
-import com.ithillel.model.Region;
+import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.model.history.History;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 @Repository
-public interface HistoryDao extends CustomDao<History, Long> {
+public interface HistoryDao extends CustomDao<History, Long>, IteratorCustomDao<History> {
 
 //    void callDeleteProcedure(Timestamp date);
 

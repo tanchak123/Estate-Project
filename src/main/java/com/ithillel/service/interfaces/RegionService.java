@@ -1,12 +1,7 @@
 package com.ithillel.service.interfaces;
 
 import com.ithillel.model.Region;
-import com.ithillel.service.generic.CustomService;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
-import java.sql.Timestamp;
-import java.util.List;
+import com.ithillel.service.generic.interfaces.CustomService;
 
 public interface RegionService extends CustomService<Region, Long> {
 //    List<Region> getAllSorted(String columnName);
@@ -15,5 +10,4 @@ public interface RegionService extends CustomService<Region, Long> {
 //
 //    List<Region> getBetweenTimeStamp(String valueName, Timestamp from, Timestamp too);
 
-    Page<Region> getAllByValueOrderById(String name, String value, Pageable page);
 }

@@ -12,8 +12,6 @@ import java.util.List;
 @NoRepositoryBean
 public interface CustomDao<C, L> extends CrudRepository<C, L> {
 
-//    <S extends C>  save(C instance);
-
     @Query("from #{#entityName} c where c.id = :id")
     C get(@Param("id") L id);
 

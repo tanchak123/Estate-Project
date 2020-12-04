@@ -1,6 +1,8 @@
 package com.ithillel.model;
 
 import com.ithillel.model.generic.CustomModel;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -19,7 +21,7 @@ public class RealProperty extends CustomModel {
             inverseJoinColumns = @JoinColumn(name = "real_property_id", referencedColumnName = "id")
 
     )
-    private List<Realtor> realtorList;
+    private List<Realtor> realtorList = new ArrayList<>();
 
     public List<Realtor> getRealtorList() {
         return realtorList;

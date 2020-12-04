@@ -20,15 +20,15 @@ import org.springframework.stereotype.Component;
 @SequenceGenerator(name = "seq_name", sequenceName = "district_id_seq", allocationSize = 1)
 public class District extends CustomModel {
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "area_id", referencedColumnName = "id")
     private Area area;
 
     @OneToMany(mappedBy = "district", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<City> cities = new ArrayList<>();
+    private List<City> cityList = new ArrayList<>();
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "district")
-    private List<EstateAgency> estateAgency;
+    @OneToMany(mappedBy = "district")
+    private List<EstateAgency> estateAgencyList = new ArrayList<>();
 
     public Area getArea() {
         return area;
@@ -38,20 +38,20 @@ public class District extends CustomModel {
         this.area = area;
     }
 
-    public List<City> getCities() {
-        return cities;
+    public List<City> getCityList() {
+        return cityList;
     }
 
-    public void setCities(List<City> cities) {
-        this.cities = cities;
+    public void setCityList(List<City> cities) {
+        this.cityList = cities;
     }
 
-    public List<EstateAgency> getEstateAgency() {
-        return estateAgency;
+    public List<EstateAgency> getEstateAgencyList() {
+        return estateAgencyList;
     }
 
-    public void setEstateAgency(List<EstateAgency> estateAgency) {
-        this.estateAgency = estateAgency;
+    public void setEstateAgencyList(List<EstateAgency> estateAgency) {
+        this.estateAgencyList = estateAgency;
     }
 
     @Override
@@ -60,12 +60,12 @@ public class District extends CustomModel {
         if (o == null || getClass() != o.getClass()) return false;
         District district = (District) o;
         return Objects.equals(area, district.area) &&
-                Objects.equals(cities, district.cities) &&
-                Objects.equals(estateAgency, district.estateAgency);
+                Objects.equals(cityList, district.cityList) &&
+                Objects.equals(estateAgencyList, district.estateAgencyList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(area, cities, estateAgency);
+        return Objects.hash(area, cityList, estateAgencyList);
     }
 }

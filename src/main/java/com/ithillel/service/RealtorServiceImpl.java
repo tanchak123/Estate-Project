@@ -7,6 +7,8 @@ import com.ithillel.model.Realtor;
 import com.ithillel.service.generic.GenericServiceImpl;
 import com.ithillel.service.interfaces.RealtorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,6 +24,11 @@ public class RealtorServiceImpl extends GenericServiceImpl<Realtor, Long> implem
     public RealtorServiceImpl(RealtorDao realtorDao) {
         super(realtorDao);
         this.realtorDao = realtorDao;
+    }
+
+    @Override
+    public Page<Realtor> getAllByValueOrderById(String name, String value, Pageable page, Long count) {
+        return realtorDao.getAllByValueOrderById(new Realtor(), name, value, page, count);
     }
 
 

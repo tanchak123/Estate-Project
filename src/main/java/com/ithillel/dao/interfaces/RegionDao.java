@@ -1,13 +1,11 @@
 package com.ithillel.dao.interfaces;
 
 import com.ithillel.dao.generic.CustomDao;
-import com.ithillel.dao.generic.Iterator;
-import com.ithillel.dao.generic.IteratorCustom;
 import com.ithillel.model.Region;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface RegionDao extends CustomDao<Region, Long>, IteratorCustom<Region> {
+public interface RegionDao extends CustomDao<Region, Long> {
 
 
 //    List<Region> getAllSorted(String columnName);

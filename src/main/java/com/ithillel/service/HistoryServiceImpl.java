@@ -5,6 +5,8 @@ import com.ithillel.model.history.History;
 import com.ithillel.service.generic.GenericServiceImpl;
 import com.ithillel.service.interfaces.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +14,11 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 @Service
-public class HistoryServiceImpl extends GenericServiceImpl<History, Long> implements HistoryService {
+public class HistoryServiceImpl extends GenericServiceImpl<History, Long>
+        implements HistoryService {
+
+    @Autowired
+    History history;
 
     private HistoryDao historyDao;
 
@@ -42,5 +48,10 @@ public class HistoryServiceImpl extends GenericServiceImpl<History, Long> implem
     @Override
     public void deleteAllByCreateDateBefore(Long date) {
         historyDao.delete_all_by_date(Timestamp.from(Instant.ofEpochMilli(date)));
+    }
+
+    @Override
+    public Page<History> getAllByValueOrderById(String name, String value, Pageable page, Long count) {
+        return historyDao.getAllByValueOrderById(history , name, value, page, count);
     }
 }

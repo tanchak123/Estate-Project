@@ -24,11 +24,6 @@ public class RegionServiceImpl extends GenericServiceImpl<Region, Long>
         this.regionDao = regionDao;
     }
 
-    @Override
-    public Page<Region> getAllByValueOrderById(String name, String value, Pageable page) {
-        Assert.notNull(value, "value is null");
-        return regionDao.method(name, value, page);
-    }
 
 //    @Transactional(readOnly = true)
 //    public List<Region> getAllSorted(String columnName) {

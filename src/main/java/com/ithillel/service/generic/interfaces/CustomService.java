@@ -1,4 +1,4 @@
-package com.ithillel.service.generic;
+package com.ithillel.service.generic.interfaces;
 
 import java.util.List;
 

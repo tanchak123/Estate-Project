@@ -141,9 +141,4 @@ call delete_all_by_date('2020-11-19 14:38:01.603000'::timestamp without time zon
 
 select * from delete_all_by_date('2020-11-19 14:38:01.603000'::timestamp without time zone);
 
-select history0_.id as id1_6_, history0_.client_id as client_i5_6_, history0_.create_date as create_d2_6_, history0_.history_level as history_3_6_, history0_.history_type as history_4_6_ from History history0_
-where history0_.<1605789727000::timestamp
-
-
-
-SELEC
+SELECT * from history where client_id = 7

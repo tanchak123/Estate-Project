@@ -5,8 +5,13 @@ import com.ithillel.model.history.History;
 import com.ithillel.model.history.HistoryDetail;
 import com.ithillel.service.interfaces.ClientService;
 import com.ithillel.service.interfaces.HistoryService;
+import com.ithillel.utils.CustomUtils;
+import com.ithillel.utils.interfaces.UtilsInterfaces;
+import org.hibernate.engine.query.spi.HQLQueryPlan;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import service.ServiceTest;
 
 import java.sql.Timestamp;
@@ -34,8 +39,8 @@ public class HistoryServiceTest extends ServiceTest {
     @Test
     public void createTest() {
         History history = new History();
-        history.setHistory_level("TEST");
-        history.setHistory_type("HIGH");
+        history.setHistoryLevel("TEST");
+        history.setHistoryType("HIGH");
         history.setCreateDate(System.currentTimeMillis());
         ClientService clientService = (ClientService) annotationConfigApplicationContext
                 .getBean("clientServiceImpl");
@@ -44,10 +49,10 @@ public class HistoryServiceTest extends ServiceTest {
         HistoryDetail historyDetail = new HistoryDetail();
         historyDetail.setHistory(history);
         historyDetail.setName(client.getName());
-        historyDetail.setValue(history.getHistory_type());
+        historyDetail.setValue(history.getHistoryType());
         history.setHistoryDetail(historyDetail);
         historyService.create(history);
-        Assert.assertEquals(historyService.getById(history.getId()).getHistory_type(), history.getHistory_type());
+        Assert.assertEquals(historyService.getById(history.getId()).getHistoryType(), history.getHistoryType());
         Assert.assertNotNull(client.getHistoryList());
     }
 
@@ -59,12 +64,12 @@ public class HistoryServiceTest extends ServiceTest {
     @Test
     public void update() {
         History updated = historyService.getById(26L);
-        updated.setHistory_level("HIGH");
+        updated.setHistoryLevel("HIGH");
         historyService.update(updated);
-        String history_level = historyService.getById(updated.getId()).getHistory_level();
+        String history_level = historyService.getById(updated.getId()).getHistoryLevel();
         Assert.assertEquals("Local model and database model not equals"
                 , history_level
-                , updated.getHistory_level());
+                , updated.getHistoryLevel());
     }
 
     @Test
@@ -77,9 +82,14 @@ public class HistoryServiceTest extends ServiceTest {
                 .toInstant(OffsetDateTime.now().getOffset()));
         Timestamp timestamp1 = Timestamp.from(localDateTime1
                 .toInstant(OffsetDateTime.now().getOffset()));
-//        historyService.callDeleteProcedure(timestamp);
-//        historyService.callDeleteProcedureNative(timestamp1);
-//        historyService.callDeleteProcedureTemplate(timestamp);
         historyService.deleteAllByCreateDateBefore(timestamp.getTime());
+    }
+
+    @Test
+    public void pageable() {
+        final String name = "historyLevel";
+        final String value = "TEST";
+        CustomUtils.testPageable(name, value, historyService,
+                PageRequest.of(0, 3));
     }
 }

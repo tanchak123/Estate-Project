@@ -3,11 +3,8 @@ import com.ithillel.model.*;
 import com.ithillel.service.interfaces.RegionService;
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import service.ServiceTest;
-import java.sql.Timestamp;
-import java.time.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -50,7 +47,7 @@ public class RegionServiceTest extends ServiceTest {
         City city = new City();
         city.setName("Южный");
         city.setDistrict(district);
-        district.setCities(new ArrayList<>(List.of(city)));
+        district.setCityList(new ArrayList<>(List.of(city)));
 
         EstateAgency estateAgency1 = new EstateAgency();
         estateAgency1.setName("Радуга");
@@ -59,12 +56,13 @@ public class RegionServiceTest extends ServiceTest {
         EstateAgency estateAgency2 = new EstateAgency();
         estateAgency2.setName("Зло");
         estateAgency2.setDistrict(district);
-        district.setEstateAgency(new ArrayList<>(List.of(estateAgency1, estateAgency2)));
+        district.setEstateAgencyList(new ArrayList<>(List.of(estateAgency1, estateAgency2)));
 
         Realtor realtor1 = new Realtor();
         realtor1.setName("Alex");
         realtor1.setSurName("Test1");
-        realtor1.addEstateAgencyList(new ArrayList<>(List.of(estateAgency1, estateAgency2)));
+        realtor1.getEstateAgencyList().add(estateAgency1);
+        realtor1.getEstateAgencyList().add(estateAgency2);
 
         Realtor realtor2 = new Realtor();
         realtor2.setName("Василий");
@@ -98,20 +96,6 @@ public class RegionServiceTest extends ServiceTest {
         regionService.update(updated);
         String name = regionService.getById(updated.getId()).getName();
         Assert.assertEquals("Local model and database model not equals", name, updated.getName());
-    }
-
-    @Test
-    public void pageable() {
-        Page<Region> regions = regionService.getAllByValueOrderById("name", "Region", PageRequest.of(0, 3));
-        while (regions.hasNext()) {
-            for (Region region : regions.getContent()) {
-                System.out.println(region.getId());
-            }
-            regions = regionService.getAllByValueOrderById("name", "Region", regions.nextOrLastPageable());
-        }
-        for (Region region : regions.getContent()) {
-            System.out.println(region.getId());
-        }
     }
 
 //    @Test

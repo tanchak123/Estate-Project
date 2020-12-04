@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -14,10 +15,10 @@ import org.springframework.stereotype.Component;
 @SequenceGenerator(name = "seq_name", sequenceName = "realtor_id_seq", allocationSize = 1)
 public class Realtor extends CustomModel {
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "realtorList")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "realtorList")
     private List<EstateAgency> estateAgencyList = new ArrayList<>();
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "realtorList")
+    @ManyToMany(cascade = {}, mappedBy = "realtorList")
     private List<RealProperty> realPropertyList = new ArrayList<>();
 
     @Column(name = "surname")
@@ -48,10 +49,6 @@ public class Realtor extends CustomModel {
 
     public void setEstateAgencyList(List<EstateAgency> estateAgencyList) {
         this.estateAgencyList = estateAgencyList;
-    }
-
-    public void addEstateAgencyList(List<EstateAgency> estateAgency) {
-        this.estateAgencyList.addAll(estateAgency);
     }
 
     public List<RealProperty> getRealPropertyList() {
