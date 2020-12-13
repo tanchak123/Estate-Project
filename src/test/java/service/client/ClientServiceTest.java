@@ -9,6 +9,7 @@ import com.ithillel.utils.CustomUtils;
 import com.ithillel.utils.interfaces.UtilsInterfaces;
 import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import service.ServiceTest;
 
@@ -42,11 +43,28 @@ public class ClientServiceTest extends ServiceTest {
     }
 
     @Test
+    public void getAll() {
+        clientService.getAll().forEach(System.out::println);
+    }
+
+    @Test
     public void pageable() {
         final String name = "name";
         final String value = "TESTER";
         CustomUtils.testPageable(name, value, clientService,
                 PageRequest.of(0, 3));
+        int page = 0;
+        Page<Client> all = clientService.findAll(PageRequest.of(page, 4));
+        while (all.getPageable().isPaged()) {
+            System.out.println("WHILE");
+            for (Client client : all.getContent()) {
+                System.out.println(client.getSurname());
+                System.out.println(client.getId());
+            }
+            page++;
+            all = clientService.findAll(all.nextPageable());
+            System.out.println("TOTAL " + all.getTotalPages());
+        }
     }
 
 

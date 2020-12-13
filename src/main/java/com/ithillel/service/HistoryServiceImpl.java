@@ -1,5 +1,6 @@
 package com.ithillel.service;
 
+import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.dao.interfaces.HistoryDao;
 import com.ithillel.model.history.History;
 import com.ithillel.service.generic.GenericServiceImpl;
@@ -23,8 +24,8 @@ public class HistoryServiceImpl extends GenericServiceImpl<History, Long>
     private HistoryDao historyDao;
 
     @Autowired
-    public HistoryServiceImpl(HistoryDao historyDao) {
-        super(historyDao);
+    public HistoryServiceImpl(HistoryDao historyDao, IteratorCustomDao<History> iteratorCustomDao) {
+        super(historyDao, new History(), iteratorCustomDao);
         this.historyDao = historyDao;
     }
 

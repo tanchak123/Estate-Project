@@ -1,5 +1,6 @@
 package com.ithillel.service;
 
+import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.dao.interfaces.RealtorDao;
 import com.ithillel.model.EstateAgency;
 import com.ithillel.model.RealProperty;
@@ -21,8 +22,8 @@ public class RealtorServiceImpl extends GenericServiceImpl<Realtor, Long> implem
     RealtorDao realtorDao;
 
     @Autowired
-    public RealtorServiceImpl(RealtorDao realtorDao) {
-        super(realtorDao);
+    public RealtorServiceImpl(RealtorDao realtorDao, IteratorCustomDao<Realtor> iteratorCustomDao) {
+        super(realtorDao, new Realtor(), iteratorCustomDao);
         this.realtorDao = realtorDao;
     }
 

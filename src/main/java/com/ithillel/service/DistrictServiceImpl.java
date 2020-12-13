@@ -1,5 +1,6 @@
 package com.ithillel.service;
 
+import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.dao.interfaces.DistrictDao;
 import com.ithillel.model.District;
 import com.ithillel.service.generic.GenericServiceImpl;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class DistrictServiceImpl extends GenericServiceImpl<District, Long> implements DistrictService {
 
     @Autowired
-    public DistrictServiceImpl(DistrictDao districtDao) {
-        super(districtDao);
+    public DistrictServiceImpl(DistrictDao districtDao, IteratorCustomDao<District> iteratorCustomDao) {
+        super(districtDao, new District(), iteratorCustomDao);
     }
 }

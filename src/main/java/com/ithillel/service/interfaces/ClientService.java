@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface ClientService extends CustomService<Client, Long>, IteratorCustomService<Client> {
 
-    Page<Client> getAllByValueOrderById(String name, String value, Pageable page, Long count);
+    Page<Client> findAll(Pageable pageable);
+
+
 
 }

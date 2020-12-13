@@ -1,5 +1,6 @@
 package com.ithillel.service;
 
+import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.dao.interfaces.RegionDao;
 import com.ithillel.model.Region;
 import com.ithillel.service.generic.GenericServiceImpl;
@@ -19,8 +20,8 @@ public class RegionServiceImpl extends GenericServiceImpl<Region, Long>
     private final RegionDao regionDao;
 
     @Autowired
-    public RegionServiceImpl(RegionDao regionDao) {
-        super(regionDao);
+    public RegionServiceImpl(RegionDao regionDao, IteratorCustomDao<Region> iteratorCustomDao) {
+        super(regionDao, new Region(), iteratorCustomDao);
         this.regionDao = regionDao;
     }
 

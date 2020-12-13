@@ -13,9 +13,6 @@ import org.junit.Test;
 import org.springframework.data.domain.PageRequest;
 import service.ServiceTest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class RealPropertyServiceTest extends ServiceTest {
 
     private final RealPropertyService realPropertyService = (RealPropertyService)

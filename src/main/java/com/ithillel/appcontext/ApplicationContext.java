@@ -23,9 +23,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @ImportResource("classpath:springCfg.xml")
-@ComponentScan(value = {"com.ithillel.service",
+@ComponentScan(basePackages = {
+        "com.ithillel.controller",
+        "com.ithillel.service",
         "com.ithillel.dao",
         "com.ithillel.model"})
+
 @PropertySources({
         @PropertySource("classpath:postgre.props"),
         @PropertySource("classpath:hibernate.props")})

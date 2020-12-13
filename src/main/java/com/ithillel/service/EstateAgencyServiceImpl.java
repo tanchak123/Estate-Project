@@ -1,5 +1,6 @@
 package com.ithillel.service;
 
+import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.dao.interfaces.EstateAgencyDao;
 import com.ithillel.model.EstateAgency;
 import com.ithillel.service.generic.GenericServiceImpl;
@@ -14,18 +15,15 @@ public class EstateAgencyServiceImpl extends GenericServiceImpl<EstateAgency, Lo
         implements EstateAgencyService {
 
     private final EstateAgencyDao estateAgencyDao;
-
-    private final EstateAgency estateAgency;
-
     @Autowired
-    public EstateAgencyServiceImpl(EstateAgencyDao estateAgencyDao, EstateAgency estateAgency) {
-        super(estateAgencyDao);
+    public EstateAgencyServiceImpl(EstateAgencyDao estateAgencyDao, EstateAgency estateAgency
+            , IteratorCustomDao<EstateAgency> iteratorCustomDao) {
+        super(estateAgencyDao, estateAgency, iteratorCustomDao);
         this.estateAgencyDao = estateAgencyDao;
-        this.estateAgency = estateAgency;
     }
 
-    @Override
-    public Page<EstateAgency> getAllByValueOrderById(String name, String value, Pageable page, Long count) {
-        return estateAgencyDao.getAllByValueOrderById(estateAgency, name, value, page, count);
-    }
+//    @Override
+//    public Page<EstateAgency> getAllByValueOrderById(String name, String value, Pageable page, Long count) {
+//        return estateAgencyDao.getAllByValueOrderById(estateAgency, name, value, page, count);
+//    }
 }

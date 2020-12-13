@@ -1,5 +1,7 @@
+
 package com.ithillel.service;
 
+import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.dao.interfaces.RealPropertyDao;
 import com.ithillel.model.RealProperty;
 import com.ithillel.service.generic.GenericServiceImpl;
@@ -17,8 +19,9 @@ public class RealPropertyServiceImpl extends GenericServiceImpl<RealProperty, Lo
     RealPropertyDao realPropertyDao;
 
     @Autowired
-    public RealPropertyServiceImpl(RealPropertyDao realPropertyDao) {
-        super(realPropertyDao);
+    public RealPropertyServiceImpl(RealPropertyDao realPropertyDao
+            , IteratorCustomDao<RealProperty> iteratorCustomDao) {
+        super(realPropertyDao, new RealProperty(), iteratorCustomDao);
         this.realPropertyDao = realPropertyDao;
     }
 
@@ -27,3 +30,4 @@ public class RealPropertyServiceImpl extends GenericServiceImpl<RealProperty, Lo
         return realPropertyDao.getAllByValueOrderById(new RealProperty(), name, value, page, count);
     }
 }
+

@@ -1,6 +1,8 @@
 package com.ithillel.service.generic;
 
 import com.ithillel.dao.generic.CustomDao;
+import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
+import com.ithillel.model.Client;
 import com.ithillel.model.generic.CustomModel;
 import com.ithillel.model.generic.GetId;
 import java.lang.reflect.*;
@@ -9,18 +11,27 @@ import java.util.Collection;
 import java.util.List;
 
 import com.ithillel.service.generic.interfaces.CustomService;
+import com.ithillel.service.generic.interfaces.IteratorCustomService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 @Transactional(propagation = Propagation.REQUIRED)
-public abstract class GenericServiceImpl<C, L> implements CustomService<C, L> {
+public abstract class GenericServiceImpl<C, L> implements CustomService<C, L>, IteratorCustomService<C> {
 
     protected final CustomDao<C, L> customDao;
 
-    public GenericServiceImpl(final CustomDao<C, L> customDao) {
+    private final IteratorCustomDao<C> iteratorCustomDao;
+
+    private final C c;
+
+    public GenericServiceImpl(final CustomDao<C, L> customDao, C c, IteratorCustomDao<C> iteratorCustomDao) {
         Assert.notNull(customDao, "Can't get dao with name " + customDao);
+        this.iteratorCustomDao = iteratorCustomDao;
         this.customDao = customDao;
+        this.c = c;
     }
 
     @Override
@@ -103,6 +114,18 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L> {
     @Transactional(readOnly = true)
     public List<C> getAll() {
         return customDao.getAll();
+    }
+
+    @Override
+    @Transactional
+    public Page<C> getAllByValueOrderById(String name, String value, Pageable page, Long count) {
+        return iteratorCustomDao.getAllByValueOrderById(c, name, value, page, count);
+    }
+
+    @Override
+    public Page<C> getAllByValueOrderById(String name, String value, Pageable page) {
+
+        return getAllByValueOrderById(name, value, page, null);
     }
 
     private static <V>ArrayList getGenericList(final V instance, final String mainModelName)

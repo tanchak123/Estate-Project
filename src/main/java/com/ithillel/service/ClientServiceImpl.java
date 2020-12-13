@@ -1,8 +1,10 @@
 package com.ithillel.service;
 
+import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.dao.interfaces.ClientDao;
 import com.ithillel.model.Client;
 import com.ithillel.service.generic.GenericServiceImpl;
+import com.ithillel.service.generic.interfaces.IteratorCustomService;
 import com.ithillel.service.interfaces.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,15 +20,15 @@ public class ClientServiceImpl extends GenericServiceImpl<Client, Long> implemen
     private final Client client;
 
     @Autowired
-    public ClientServiceImpl(ClientDao clientDao, Client client) {
-        super(clientDao);
+    public ClientServiceImpl(ClientDao clientDao, Client client, IteratorCustomDao<Client> iteratorCustomDao) {
+        super(clientDao, client, iteratorCustomDao);
         this.clientDao = clientDao;
         this.client = client;
     }
 
     @Override
     @Transactional
-    public Page<Client> getAllByValueOrderById(String name, String value, Pageable page, Long count) {
-        return clientDao.getAllByValueOrderById(client, name, value, page, count);
+    public Page<Client> findAll(Pageable pageable) {
+        return clientDao.findAll(pageable);
     }
 }

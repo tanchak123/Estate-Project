@@ -1,5 +1,6 @@
 package com.ithillel.service;
 
+import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.dao.interfaces.CityDao;
 import com.ithillel.model.City;
 import com.ithillel.service.generic.GenericServiceImpl;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class CityServiceImpl extends GenericServiceImpl<City, Long> implements CityService {
 
     @Autowired
-    public CityServiceImpl(CityDao cityDao) {
-        super(cityDao);
+    public CityServiceImpl(CityDao cityDao, IteratorCustomDao<City> iteratorCustomDao) {
+        super(cityDao, new City(), iteratorCustomDao);
     }
 }
