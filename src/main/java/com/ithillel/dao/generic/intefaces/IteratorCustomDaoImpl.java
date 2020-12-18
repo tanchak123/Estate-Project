@@ -29,7 +29,7 @@ public class IteratorCustomDaoImpl<C> implements IteratorCustomDao<C> {
         Assert.notNull(page, "page is null");
         CriteriaBuilder cb = em.getCriteriaBuilder();
         String[] mass = name.split("\\.");
-        if (!page.hasPrevious()) {
+        if (count == null) {
             CriteriaQuery<Long> countQ =  cb.createQuery(Long.class);
             Root<C> countRoot = (Root<C>) countQ.from(c.getClass());
             Predicate expression = CustomUtils.getEqualExpression(cb, countRoot, mass, value);
@@ -46,8 +46,7 @@ public class IteratorCustomDaoImpl<C> implements IteratorCustomDao<C> {
         TypedQuery<C> query = em.createQuery(cq);
         query.setFirstResult(page.getPageSize() * page.getPageNumber());
         query.setMaxResults(page.getPageSize());
-        Page<C> result = new PageImpl<>(query.getResultList(), page, count);
-        return result;
+        return new PageImpl<>(query.getResultList(), page, count);
     }
 
 

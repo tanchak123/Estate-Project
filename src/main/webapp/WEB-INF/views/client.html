@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Пользователь</title>
+</head>
+<h1>Профиль</h1>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Имя</td>
+        <td>Фамилия</td>
+        <td>Логин</td>
+        <td>Изменить</td>
+        <td>Список всех пользователей</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${client.id}"></td>
+        <td th:text="${client.name}"></td>
+        <td th:text="${client.surname}"></td>
+        <td th:text="${client.login}"></td>
+        <td><a th:href="@{/client/update/{id}(id=${client.id})}">Изменить</a></td>
+        <td><a th:href="@{/clients}">Все пользователи</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,6 +1,6 @@
 package com.ithillel.model;
 
-import com.ithillel.model.generic.CustomModel;
+import com.ithillel.model.customodel.CustomModel;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;

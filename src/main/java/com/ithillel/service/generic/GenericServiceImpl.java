@@ -2,9 +2,8 @@ package com.ithillel.service.generic;
 
 import com.ithillel.dao.generic.CustomDao;
 import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
-import com.ithillel.model.Client;
-import com.ithillel.model.generic.CustomModel;
-import com.ithillel.model.generic.GetId;
+import com.ithillel.model.customodel.CustomModel;
+import com.ithillel.model.customodel.GetId;
 import java.lang.reflect.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -124,7 +123,6 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L>, I
 
     @Override
     public Page<C> getAllByValueOrderById(String name, String value, Pageable page) {
-
         return getAllByValueOrderById(name, value, page, null);
     }
 

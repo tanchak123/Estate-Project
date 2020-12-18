@@ -3,12 +3,10 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>org.example</groupId>
     <artifactId>Estate-Project</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-
     <properties>
         <jdk.version>9</jdk.version>
         <maven.compiler.target>${jdk.version}</maven.compiler.target>
@@ -20,6 +18,7 @@
             https://raw.githubusercontent.com/tanchak123/checkstylePlugin/master/checkStylePlugin.xml
         </maven.checkstyle.plugin.configLocation>
     </properties>
+
     <build>
     <plugins>
         <plugin>
@@ -104,7 +103,11 @@
             <artifactId>thymeleaf-spring5</artifactId>
             <version>3.0.11.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>2.3.0</version>
+        </dependency>
     </dependencies>
-
 
 </project>

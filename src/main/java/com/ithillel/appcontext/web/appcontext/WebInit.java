@@ -14,6 +14,7 @@ public class WebInit implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+        servletContext.setRequestCharacterEncoding("UTF-8");
         final AnnotationConfigWebApplicationContext configApplicationContext
                 = new AnnotationConfigWebApplicationContext();
         configApplicationContext.register(ApplicationContext.class);
@@ -25,7 +26,6 @@ public class WebInit implements WebApplicationInitializer {
                 ,new DispatcherServlet(webApplicationContext));
         dispatcherServlet.setLoadOnStartup(1);
         dispatcherServlet.addMapping("/");
-
     }
 
 }

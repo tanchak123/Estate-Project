@@ -1,7 +1,8 @@
 package com.ithillel.model;
 
-import com.ithillel.model.generic.CustomModel;
+import com.ithillel.model.customodel.CustomModel;
 import com.ithillel.model.history.History;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "client")
 @SequenceGenerator(name = "seq_name", sequenceName = "client_id_seq", allocationSize = 1)
+@DynamicUpdate
 public class Client extends CustomModel {
 
     @Column(name = "surname")

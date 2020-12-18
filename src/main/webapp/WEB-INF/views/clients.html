@@ -2,26 +2,45 @@
 <head>
     <title>Пользователи</title>
 </head>
-<h1>Hi from html</h1>
+<h1>Список всех пользователей</h1>
 <body>
 
 <table>
     <thead>
     <tr>
         <td>Номер</td>
-        <td>Название</td>
-        <td>удалить</td>
+        <td>ID</td>
+        <td>Логин</td>
+        <td>Просмотр</td>
+        <td>Удалить</td>
     </tr>
     </thead>
     <tbody>
     <tr th:each="client, iterator: ${clients}">
         <td th:text="${iterator.index+1}"></td>
-        <td th:text="${client.name}"></td>
-        <td th:text="${client.surname}"></td>
+        <td th:text="${client.id}"></td>
         <td th:text="${client.login}"></td>
+        <td><a th:href="@{/client/{id}(id=${client.id})}">Посмотреть</a></td>
+        <td><a th:href="@{/client/delete/{id}(id=${client.id})}">Удалить</a></td>
     </tr>
     </tbody>
-
+    <tr>
+        <td th:text='${"PageNumber : " + (page + 1)}'></td>
+        <td>
+            <a th:href="@{/clients(page=${page} - 1)}">LAST</a>
+        </td>
+        <td>
+            <a th:href="@{/clients(page=${page} + 1)}">NEXT</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a th:href="@{/client/create}">Создать</a>
+        </td>
+        <td>
+            <a th:href="@{/client/delete}">Удалить по айди</a>
+        </td>
+    </tr>
 </table>
 </body>
 </html>

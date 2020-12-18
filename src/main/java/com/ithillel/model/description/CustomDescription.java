@@ -1,7 +1,5 @@
 package com.ithillel.model.description;
 
-import com.ithillel.model.generic.CustomModel;
-
 import javax.persistence.*;
 
 @Embeddable

@@ -1,6 +1,6 @@
 package com.ithillel.utils;
 
-import com.ithillel.model.generic.GetId;
+import com.ithillel.model.customodel.GetId;
 import com.ithillel.service.generic.interfaces.IteratorCustomService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

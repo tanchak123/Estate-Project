@@ -1,9 +1,8 @@
-package com.ithillel.model.generic;
+package com.ithillel.model.customodel;
 
 import com.ithillel.utils.CreateTimeStampConverter;
 import com.ithillel.utils.UpdateTimeStampConverter;
 
-import java.sql.Timestamp;
 import javax.persistence.*;
 
 @MappedSuperclass
@@ -17,7 +16,7 @@ public class CustomModel implements GetId {
     @Convert(converter = UpdateTimeStampConverter.class)
     protected Long updateDate;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date", updatable = false)
     @Convert(converter = CreateTimeStampConverter.class)
     protected Long createDate;
 

@@ -1,4 +1,4 @@
-package com.ithillel.model.generic;
+package com.ithillel.model.customodel;
 
 public interface GetId {
 

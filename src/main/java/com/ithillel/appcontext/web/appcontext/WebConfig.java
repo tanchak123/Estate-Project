@@ -23,7 +23,7 @@ public class WebConfig {
         templateResolver.setSuffix(".html");
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setTemplateMode(TemplateMode.HTML);
-        templateResolver.setCharacterEncoding(StandardCharsets.UTF_8.displayName());
+        templateResolver.setCharacterEncoding("UTF-8");
         return templateResolver;
     }
 
@@ -40,7 +40,8 @@ public class WebConfig {
     public ViewResolver viewResolver(SpringTemplateEngine templateEngine) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine);
-        resolver.setContentType("text/html;charset=UTF-8");
+        resolver.setContentType("text/html; charset=UTF-8");
+        resolver.setCharacterEncoding("UTF-8");
         return resolver;
     }
 }

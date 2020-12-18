@@ -1,12 +1,11 @@
 package com.ithillel.model;
 
-import com.ithillel.model.generic.CustomModel;
+import com.ithillel.model.customodel.CustomModel;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
-import org.hibernate.annotations.Cascade;
 import org.springframework.stereotype.Component;
 
 @Component

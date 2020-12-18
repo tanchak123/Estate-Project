@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Форма обновления данных</title>
+</head>
+<body>
+<form accept-charset="UTF-8" method="POST" th:object="${clientDto}" th:action="@{/client/update}">
+    <label>Имя:</label><input type="text" th:name="name" th:id="name" th:value="${client.name}">
+    <br>
+    Фамилия: <input type="text" th:name="surname" th:id="surname" th:value="${client.surname}"><br>
+    Логин: <input type="text" th:name="login" th:id="login" th:value="${client.login}"><br>
+    ID <input type="text" readonly="readonly" th:name="id" th:id="id" th:value="${client.id}"><br>
+    <input type="submit" value="Изменить">
+</form>
+</body>
+</html>

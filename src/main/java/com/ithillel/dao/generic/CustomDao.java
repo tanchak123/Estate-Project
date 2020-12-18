@@ -2,6 +2,7 @@ package com.ithillel.dao.generic;
 
 import com.ithillel.model.Client;
 import com.ithillel.model.history.History;
+import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Modifying;
@@ -21,8 +22,11 @@ public interface CustomDao<C, L> extends CrudRepository<C, L> {
     @Query("from #{#entityName}")
     List<C> getAll();
 
+    @Modifying
     <S extends C> S save(S var1);
 
+
+    @Modifying
     void delete(C instance);
 
     Page<Client> findAll(Pageable pageable);
