@@ -41,7 +41,7 @@ public class ClientsController {
                 client.getLogin())));
         model.addAttribute("clients", clientDtoList);
         model.addAttribute("page", page);
-        return "clients";
+        return "clients/clients";
     }
 
     @RequestMapping("/client/{id}")
@@ -51,7 +51,7 @@ public class ClientsController {
         ModelMapper modelMapper = new ModelMapper();
         ClientDto clientDto = modelMapper.map(client, ClientDto.class);
         model.addAttribute("client", clientDto);
-        return "client";
+        return "clients/client";
     }
 
     @RequestMapping(value = "/client/update/{id}", method = RequestMethod.GET)
@@ -62,7 +62,7 @@ public class ClientsController {
         ClientDto clientDto = modelMapper.map(client, ClientDto.class);
         model.addAttribute("client", clientDto);
         model.addAttribute("id", id);
-        return "clientsUpdate";
+        return "clients/clientsUpdate";
     }
 
     @RequestMapping(value = "/client/update", method = RequestMethod.POST)
@@ -77,7 +77,7 @@ public class ClientsController {
 
     @RequestMapping(value = "client/delete", method = RequestMethod.GET)
     public String deleteClient() {
-        return "clientsDelete";
+        return "clients/clientsDelete";
     }
 
     @RequestMapping(value = "client/delete", method = RequestMethod.POST)
@@ -91,12 +91,13 @@ public class ClientsController {
         return "redirect:/clients/";
     }
     
-    @GetMapping(value = "client/create")
-    private String createForm() {
-        return "clientsCreate";
+    @GetMapping(value = "/client/create")
+    private String createForm(Model model) {
+        model.addAttribute("client", new Client());
+        return "clients/clientsCreate";
     }
 
-    @PostMapping(value = "client/create")
+    @PostMapping(value = "/client/create")
     private String createForm(@ModelAttribute Client client) {
         return "redirect:/client/" + clientService.create(client).getId();
     }
