@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Регионы</title>
+</head>
+<h1>Список всех регионов</h1>
+<body>
+<a href="/">Главная</a>
+<table>
+    <thead>
+    <tr>
+        <td>Номер</td>
+        <td>ID</td>
+        <td>Название</td>
+        <td>Просмотр</td>
+        <td>Удалить</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="region, iterator: ${regions}">
+        <td th:text="${iterator.index+1}"></td>
+        <td th:text="${region.id}"></td>
+        <td th:text="${region.name}"></td>
+        <td><a th:href="@{/region/{id}(id=${region.id})}">Посмотреть</a></td>
+        <td><a th:href="@{/region/delete/{id}(id=${region.id})}">Удалить</a></td>
+    </tr>
+    </tbody>
+    <tr>
+        <td th:text='${"PageNumber : " + (page + 1)}'></td>
+        <td>
+            <a th:href="@{/regions(page=${page} - 1)}">LAST</a>
+        </td>
+        <td>
+            <a th:href="@{/regions(page=${page} + 1)}">NEXT</a>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <a th:href="@{/region/create}">Создать</a>
+        </td>
+        <td>
+            <a th:href="@{/region/delete}">Удалить по айди</a>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

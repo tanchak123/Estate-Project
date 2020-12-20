@@ -41,7 +41,7 @@ public class EstateAgencyServiceTest extends ServiceTest {
 
     @Test
     public void delete() {
-        estateAgencyService.deleteById(53L);
+        estateAgencyService.deleteById(54L);
     }
 
     @Test

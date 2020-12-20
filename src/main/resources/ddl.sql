@@ -93,9 +93,13 @@ create table if not exists history
     name varchar(100),
     history_level varchar(100),
     history_type varchar(100),
-    client_id bigint not null,
-    FOREIGN KEY (client_id) references client(id),
     create_date timestamp without time zone not null default current_timestamp
+);
+create table if not exists client_history (
+  client_id bigint not null ,
+  FOREIGN KEY (client_id) references client(id),
+  history_id bigint not null ,
+  FOREIGN KEY (history_id) references history(id)
 );
 CREATE UNIQUE INDEX history_id ON history (id);
 create table if not exists history_detail (

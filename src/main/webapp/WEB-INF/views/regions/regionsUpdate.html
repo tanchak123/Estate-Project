@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Форма обновления данных</title>
+</head>
+<body>
+<a href="/">Главная</a>
+<form accept-charset="UTF-8" method="POST" th:object="${regionDto}" th:action="@{/region/update}">
+    <label>Имя:</label><input type="text" th:name="name" th:id="name" th:value="${region.name}">
+    <br>
+    ID <input type="text" readonly="readonly" th:name="id" th:id="id" th:value="${region.id}"><br>
+    <input type="submit" value="Изменить">
+</form>
+</body>
+</html>

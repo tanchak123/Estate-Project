@@ -21,7 +21,7 @@ public class RealtorServiceTest extends ServiceTest {
 
     @Test
     public void delete() {
-        realtorService.cascadeDelete(realtorService.getById(57L));
+        realtorService.cascadeDelete(realtorService.getById(56L));
 //        realtorService.deleteById(78L);
     }
 }

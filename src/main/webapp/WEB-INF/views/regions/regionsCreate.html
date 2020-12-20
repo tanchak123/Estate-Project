@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать регион</title>
+</head>
+<body>
+<a href="/">Главная</a>
+<form action="#" method="POST" th:object="${region}" th:action="@{/region/create}">
+    <div>
+        <label>Имя:</label>
+        <input type="text" th:field="*{name}" /><br>
+    </div>
+    <br>
+</form>
+</body>
+</html>

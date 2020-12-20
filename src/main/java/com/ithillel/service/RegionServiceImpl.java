@@ -2,6 +2,7 @@ package com.ithillel.service;
 
 import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.dao.interfaces.RegionDao;
+import com.ithillel.model.Client;
 import com.ithillel.model.Region;
 import com.ithillel.service.generic.GenericServiceImpl;
 import com.ithillel.service.interfaces.RegionService;
@@ -23,6 +24,11 @@ public class RegionServiceImpl extends GenericServiceImpl<Region, Long>
     public RegionServiceImpl(RegionDao regionDao, IteratorCustomDao<Region> iteratorCustomDao) {
         super(regionDao, new Region(), iteratorCustomDao);
         this.regionDao = regionDao;
+    }
+
+    @Override
+    public Page<Region> findAll(Pageable pageable) {
+        return regionDao.findAll(pageable);
     }
 
 

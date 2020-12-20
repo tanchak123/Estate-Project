@@ -16,13 +16,9 @@ import org.springframework.stereotype.Component;
 public class EstateAgency extends CustomModel {
 
     @ManyToMany()
-    @JoinTable(
-            name = "estate_agency_realtor",
-            joinColumns = {
-                    @JoinColumn(name = "estate_agency_id"),
-            },
-            inverseJoinColumns = {@JoinColumn(name = "realtor_id")}
-    )
+    @JoinTable(name = "estate_agency_realtor",
+            joinColumns = {@JoinColumn(name = "estate_agency_id"),},
+            inverseJoinColumns = {@JoinColumn(name = "realtor_id")})
     private List<Realtor> realtorList = new ArrayList<>();
 
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

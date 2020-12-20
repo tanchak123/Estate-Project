@@ -46,10 +46,14 @@ public class HistoryServiceTest extends ServiceTest {
                 .getBean("clientServiceImpl");
         Client client = clientService.eagerGetById(6L);
         history.setClient(client);
+        client.getHistoryList().add(history);
+        System.out.println(client.getId());
+
         HistoryDetail historyDetail = new HistoryDetail();
         historyDetail.setHistory(history);
         historyDetail.setName(client.getName());
         historyDetail.setValue(history.getHistoryType());
+
         history.setHistoryDetail(historyDetail);
         historyService.create(history);
         Assert.assertEquals(historyService.getById(history.getId()).getHistoryType(), history.getHistoryType());

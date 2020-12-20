@@ -5,6 +5,7 @@
     <title>Форма обновления данных</title>
 </head>
 <body>
+<a href="/">Главная</a>
 <form accept-charset="UTF-8" method="POST" th:object="${clientDto}" th:action="@{/client/update}">
     <label>Имя:</label><input type="text" th:name="name" th:id="name" th:value="${client.name}">
     <br>

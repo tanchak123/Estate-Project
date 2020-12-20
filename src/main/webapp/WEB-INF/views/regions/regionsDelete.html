@@ -1,12 +1,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Удаление пользователя</title>
+    <title>Удаление региона</title>
 </head>
 <body>
 <a href="/">Главная</a>
-<h1>Введите айди пользователя для удаленния</h1>
-<form th:method="post" th:action="@{/client/delete/{id}(id=${id})}">
+<h1>Введите айди региона для удаленния</h1>
+<form th:method="post" th:action="@{/region/delete/{id}(id=${id})}">
     ID <input type="text" name="id"><br>
     <input type="submit" value="Удалить">
 </form>

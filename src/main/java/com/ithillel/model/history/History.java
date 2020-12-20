@@ -24,12 +24,17 @@ public class History {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_name")
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "create_date")
     @Convert(converter = CreateTimeStampConverter.class)
     private Long createDate;
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
-    @JoinColumn(name = "client_id", referencedColumnName = "id")
+    @ManyToOne(cascade = {})
+    @JoinTable(name = "client_history",
+            joinColumns = {@JoinColumn(name = "history_id")},
+            inverseJoinColumns = {@JoinColumn(name = "client_id")})
     private Client client;
 
     @Column(name = "history_level")
@@ -87,5 +92,13 @@ public class History {
 
     public void setHistoryDetail(HistoryDetail historyDetail) {
         this.historyDetail = historyDetail;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

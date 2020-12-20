@@ -25,26 +25,33 @@ public class ClientServiceTest extends ServiceTest {
 
     @Test
     public void createTest() {
-        History history = new History();
-        history.setHistoryLevel("TEST");
-        history.setHistoryType("HIGH");
-        history.setCreateDate(System.currentTimeMillis());
+            History history = new History();
+            history.setName("createTest");
+            history.setHistoryLevel("TEST");
+            history.setHistoryType("HIGH");
+            history.setCreateDate(System.currentTimeMillis());
 
-        Client client = new Client();
-        client.setLogin("test");
-        client.setPassword("test");
-        client.setName("TESTER");
-        client.setSurname("TESTERENKO");
-        client.addHistoryList(new ArrayList<>(List.of(history)));
-        history.setClient(client);
-        clientService.create(client);
-        Assert.assertEquals(clientService.getById(client.getId()).getLogin(),
-                client.getLogin());
+            Client client = new Client();
+            client.setLogin("test");
+            client.setPassword("test");
+            client.setName("TESTER");
+            client.setSurname("TESTERENKO");
+            client.addHistoryList(new ArrayList<>(List.of(history)));
+            history.setClient(client);
+            clientService.create(client);
+            Assert.assertEquals(clientService.getById(client.getId()).getLogin(),
+                    client.getLogin());
     }
 
     @Test
     public void getAll() {
         clientService.getAll().forEach(System.out::println);
+    }
+
+    @Test
+    public void deleteTest() {
+        clientService.deleteById(2L);
+        Assert.assertNull(clientService.getById(7L));
     }
 
     @Test

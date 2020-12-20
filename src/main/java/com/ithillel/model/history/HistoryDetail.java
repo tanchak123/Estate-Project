@@ -20,7 +20,7 @@ public class HistoryDetail {
     @Column(name = "value")
     private String value;
 
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @OneToOne(cascade = {CascadeType.MERGE})
     @JoinColumn(name = "history_id", referencedColumnName = "id")
     private History history;
 
