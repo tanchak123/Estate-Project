@@ -4,7 +4,7 @@ package com.ithillel.service;
 import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.dao.interfaces.RealPropertyDao;
 import com.ithillel.model.RealProperty;
-import com.ithillel.service.generic.GenericServiceImpl;
+import com.ithillel.service.generic.CustomServiceImpl;
 import com.ithillel.service.interfaces.RealPropertyService;
 import com.ithillel.utils.interfaces.UtilsInterfaces;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RealPropertyServiceImpl extends GenericServiceImpl<RealProperty, Long>
+public class RealPropertyServiceImpl extends CustomServiceImpl<RealProperty, Long>
         implements RealPropertyService, UtilsInterfaces<RealProperty> {
 
     RealPropertyDao realPropertyDao;
@@ -29,5 +29,6 @@ public class RealPropertyServiceImpl extends GenericServiceImpl<RealProperty, Lo
     public Page<RealProperty> getAllByValueOrderById(String name, String value, Pageable page, Long count) {
         return realPropertyDao.getAllByValueOrderById(new RealProperty(), name, value, page, count);
     }
+
 }
 

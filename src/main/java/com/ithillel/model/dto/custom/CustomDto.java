@@ -1,5 +1,6 @@
 package com.ithillel.model.dto.custom;
 
+import com.ithillel.model.Realtor;
 import com.ithillel.model.customodel.CustomModel;
 
 public class CustomDto {
@@ -31,9 +32,9 @@ public class CustomDto {
         model.setName(getName());
     }
 
-    public void modelToDto(CustomModel model) {
-        setId(model.getId());
-        setName(model.getName());
+    public void modelToDto(Realtor realtor) {
+        setId(realtor.getId());
+        setName(realtor.getName());
     }
 
     public CustomDto() {

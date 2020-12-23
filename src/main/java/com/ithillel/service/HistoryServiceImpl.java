@@ -3,7 +3,7 @@ package com.ithillel.service;
 import com.ithillel.dao.generic.intefaces.IteratorCustomDao;
 import com.ithillel.dao.interfaces.HistoryDao;
 import com.ithillel.model.history.History;
-import com.ithillel.service.generic.GenericServiceImpl;
+import com.ithillel.service.generic.CustomServiceImpl;
 import com.ithillel.service.interfaces.HistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 import java.time.Instant;
 
 @Service
-public class HistoryServiceImpl extends GenericServiceImpl<History, Long>
+public class HistoryServiceImpl extends CustomServiceImpl<History, Long>
         implements HistoryService {
 
     @Autowired
@@ -55,4 +55,5 @@ public class HistoryServiceImpl extends GenericServiceImpl<History, Long>
     public Page<History> getAllByValueOrderById(String name, String value, Pageable page, Long count) {
         return historyDao.getAllByValueOrderById(history , name, value, page, count);
     }
+
 }

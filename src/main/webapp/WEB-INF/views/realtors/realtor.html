@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Пользователь</title>
+</head>
+<h1>Риэлтор</h1>
+<body>
+<a href="/">Главная</a>
+<table>
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Имя</td>
+        <td>Фамилия</td>
+        <td>Стаж</td>
+        <td>Изменить</td>
+        <td>Список всех пользователей</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${realtor.id}"></td>
+        <td th:text="${realtor.name}"></td>
+        <td th:text="${realtor.surname}"></td>
+        <td th:text="${realtor.experience}"></td>
+        <td><a th:href="@{/realtor/update/{id}(id=${realtor.id})}">Изменить</a></td>
+        <td><a th:href="@{/realtors}">Все пользователи</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

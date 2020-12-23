@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать риэлтора</title>
+</head>
+<body>
+<a href="/">Главная</a>
+<h1 style="color:red" th:value="${message}"></h1>
+<form action="#" method="POST" th:object="${realtor}" th:action="@{/realtor/create}">
+    <div>
+        <label>Имя:</label>
+        <input type="text" th:field="*{name}" /><br>
+    </div>
+    <div>
+        <label>Фамилия:</label>
+        <input type="text" th:field="*{surname}" /><br>
+    </div>
+    <div>
+        <label>Стаж(в годах):</label>
+        <input type="text" th:field="*{experience}" /><br>
+    </div>
+    <br>
+
+</form>
+</body>
+</html>

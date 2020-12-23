@@ -4,6 +4,7 @@ import com.ithillel.model.customodel.CustomModel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.*;
 
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class Realtor extends CustomModel {
     private String surName;
 
     @Column(name = "experience_in_years")
-    private int experience;
+    private Integer experience;
 
     public String getSurName() {
         return surName;
@@ -34,11 +35,11 @@ public class Realtor extends CustomModel {
         this.surName = surName;
     }
 
-    public int getExperience() {
+    public Integer getExperience() {
         return experience;
     }
 
-    public void setExperience(int experience) {
+    public void setExperience(Integer experience) {
         this.experience = experience;
     }
 
@@ -62,6 +63,8 @@ public class Realtor extends CustomModel {
         this.realPropertyList.addAll(propertyList);
     }
 
+
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -79,10 +82,6 @@ public class Realtor extends CustomModel {
 
     @Override
     public int hashCode() {
-        int result = estateAgencyList != null ? estateAgencyList.hashCode() : 0;
-        result = 31 * result + (realPropertyList != null ? realPropertyList.hashCode() : 0);
-        result = 31 * result + (surName != null ? surName.hashCode() : 0);
-        result = 31 * result + experience;
-        return result;
+        return Objects.hash(estateAgencyList, realPropertyList, surName, experience);
     }
 }

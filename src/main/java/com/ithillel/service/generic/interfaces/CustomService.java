@@ -1,5 +1,8 @@
 package com.ithillel.service.generic.interfaces;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import java.util.List;
 
 public interface CustomService<C, L> {
@@ -21,4 +24,6 @@ public interface CustomService<C, L> {
     C update(C c);
 
     List<C> getAll();
+
+    Page<C> findAll(Pageable pageable);
 }

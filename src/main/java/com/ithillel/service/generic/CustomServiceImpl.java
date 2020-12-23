@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 @Transactional(propagation = Propagation.REQUIRED)
-public abstract class GenericServiceImpl<C, L> implements CustomService<C, L>, IteratorCustomService<C> {
+public abstract class CustomServiceImpl<C, L> implements CustomService<C, L>, IteratorCustomService<C> {
 
     protected final CustomDao<C, L> customDao;
 
@@ -26,7 +26,7 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L>, I
 
     private final C c;
 
-    public GenericServiceImpl(final CustomDao<C, L> customDao, C c, IteratorCustomDao<C> iteratorCustomDao) {
+    public CustomServiceImpl(final CustomDao<C, L> customDao, C c, IteratorCustomDao<C> iteratorCustomDao) {
         Assert.notNull(customDao, "Can't get dao with name " + customDao);
         this.iteratorCustomDao = iteratorCustomDao;
         this.customDao = customDao;
@@ -67,20 +67,20 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L>, I
         Assert.notNull(id, "Id is " + id);
         C instance = getById(id);
         Assert.notNull(instance, "Can't get instance with id = " + id);
-            Field[] fields1 = instance.getClass().getDeclaredFields();
-            for (Field field : fields1) {
-                String fieldName = field.getName();
-                if (fieldName.endsWith("List")) {
-                    field.setAccessible(true);
-                    try {
-                        List<? super CustomModel> list = new ArrayList<>
-                                ((Collection<? super CustomModel>) field.get(instance));
-                        list.size();
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
+        Field[] fields1 = instance.getClass().getDeclaredFields();
+        for (Field field : fields1) {
+            String fieldName = field.getName();
+            if (fieldName.endsWith("List")) {
+                field.setAccessible(true);
+                try {
+                    List<? super CustomModel> list = new ArrayList<>
+                            ((Collection<? super CustomModel>) field.get(instance));
+                    list.size();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
                 }
             }
+        }
         return instance;
     }
 
@@ -126,7 +126,7 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L>, I
         return getAllByValueOrderById(name, value, page, null);
     }
 
-    private static <V>ArrayList getGenericList(final V instance, final String mainModelName)
+    private static <V> ArrayList getGenericList(final V instance, final String mainModelName)
             throws IllegalAccessException {
         Field[] fields1 = instance.getClass().getDeclaredFields();
         for (Field field : fields1) {
@@ -144,7 +144,7 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L>, I
     }
 
 
-    private <V>void cascadeDeleteFunction(final C instance) {
+    private <V> void cascadeDeleteFunction(final C instance) {
         String name = instance.getClass().getSimpleName();
         try {
             Field[] fields = instance.getClass().getDeclaredFields();
@@ -171,10 +171,10 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L>, I
                             if (fieldName1.equals(
                                     (name.charAt(0) + "").toLowerCase() +
                                             name.substring(1)
-                                    + "List"
+                                            + "List"
                             )) {
-                        field1.setAccessible(true);
-                        field1.set(innerInstance, result);
+                                field1.setAccessible(true);
+                                field1.set(innerInstance, result);
                             }
                         }
                     }
@@ -183,5 +183,10 @@ public abstract class GenericServiceImpl<C, L> implements CustomService<C, L>, I
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Page<C> findAll(Pageable pageable) {
+        return customDao.findAllByOrderById(pageable);
     }
 }

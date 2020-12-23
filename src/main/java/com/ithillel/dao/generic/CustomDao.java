@@ -29,6 +29,6 @@ public interface CustomDao<C, L> extends CrudRepository<C, L> {
     @Modifying
     void delete(C instance);
 
-    Page<C> findAll(Pageable pageable);
+    Page<C> findAllByOrderById(Pageable pageable);
 
 }
