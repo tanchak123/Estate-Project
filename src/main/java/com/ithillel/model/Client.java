@@ -25,7 +25,7 @@ public class Client extends CustomModel {
     @Column(name = "password")
     private String password;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "client")
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "client", orphanRemoval = true)
     private List<History> historyList = new ArrayList<>();
 
     public String getSurname() {
