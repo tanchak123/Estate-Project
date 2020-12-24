@@ -11,14 +11,16 @@
     <tr>
         <td>ID</td>
         <td>Имя</td>
+        <td>Область</td>
         <td>Изменить</td>
         <td>Список всех регинов</td>
     </tr>
     </thead>
     <tbody>
     <tr>
-        <td th:text="${region.id}"></td>
-        <td th:text="${region.name}"></td>
+        <td th:text="${region.id}" />
+        <td th:text="${region.name}" />
+        <td th:text="${region.area}" />
         <td><a th:href="@{/region/update/{id}(id=${region.id})}">Изменить</a></td>
         <td><a th:href="@{/regions}">Все пользователи</a></td>
     </tr>

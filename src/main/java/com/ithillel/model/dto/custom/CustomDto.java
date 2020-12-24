@@ -28,13 +28,13 @@ public class CustomDto {
         this.id = id;
     }
 
-    public void dtoToModel(CustomModel model) {
+    public void toModel(CustomModel model) {
         model.setName(getName());
     }
 
-    public void modelToDto(Realtor realtor) {
-        setId(realtor.getId());
-        setName(realtor.getName());
+    public void fromModel(CustomModel model) {
+        setId(model.getId());
+        setName(model.getName());
     }
 
     public CustomDto() {

@@ -1,15 +1,11 @@
 package com.ithillel.controller;
 
-import com.ithillel.model.Client;
 import com.ithillel.model.Region;
-import com.ithillel.model.dto.ClientDto;
 import com.ithillel.model.dto.RegionDto;
-import com.ithillel.service.interfaces.ClientService;
 import com.ithillel.service.interfaces.RegionService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,10 +32,13 @@ public class RegionController {
         if (regions.size() == 0) {
             return "redirect:/"+ name +"s?page=" + --page;
         }
-        List <RegionDto> clientDtoList = new ArrayList<>();
-        regions.forEach(region -> clientDtoList.add(new RegionDto(
-                region.getName(), region.getId())));
-        model.addAttribute(name + "s", clientDtoList);
+        List <RegionDto> regionDtos = new ArrayList<>();
+        regions.forEach(region -> {
+            RegionDto regionDto = new RegionDto();
+            regionDto.fromModel(region);
+            regionDtos.add(regionDto);
+        });
+        model.addAttribute(name + "s", regionDtos);
         model.addAttribute("page", page);
         return String.format("%ss/%ss", name, name);
     }
@@ -48,8 +47,8 @@ public class RegionController {
     public String model(Model model,
                              @PathVariable Long id) {
         Region region = regionService.getById(id);
-        ModelMapper modelMapper = new ModelMapper();
-        RegionDto regionDto = modelMapper.map(region, RegionDto.class);
+        RegionDto regionDto = new RegionDto();
+        regionDto.fromModel(region);
         model.addAttribute(name, regionDto);
         return String.format("%ss/%s", name, name);
     }
@@ -71,7 +70,7 @@ public class RegionController {
     public String postUpdate(@ModelAttribute RegionDto regionDto)
             throws UnsupportedEncodingException {
         Region region = regionService.getById(regionDto.getId());
-        regionDto.dtoToModel(region);
+        regionDto.toModel(region);
         System.out.println(region.getId());
         System.out.println(region.getName());
         regionService.update(region);

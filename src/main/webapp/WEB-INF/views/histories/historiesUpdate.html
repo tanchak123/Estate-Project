@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Создать историю</title>
+</head>
+<body>
+<a href="/">Главная</a>
+<form action="#" method="POST" th:object="${history}" th:action="@{/history/create}">
+    <div>
+        <label>Название:</label>
+        <input type="text" th:field="*{name}" /><br>
+    </div>
+    <div>
+        <label>Тип:</label>
+        <input type="text" th:field="*{historyType}" /><br>
+    </div>
+    <div>
+        <label>Уровень:</label>
+        <input type="text" th:field="*{historyLevel}" /><br>
+    </div>
+    <div>
+        <input type="submit" value="Изменить" /><br>
+    </div>
+    <br>
+</form>
+</body>
+</html>

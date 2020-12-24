@@ -1,0 +1,14 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Удаление истории</title>
+</head>
+<body>
+<a href="/">Главная</a>
+<h1>Введите айди истории для удаленния</h1>
+<form th:method="post" th:action="@{/history/delete/{id}(id=${id})}">
+    ID <input type="text" name="id"><br>
+    <input type="submit" value="Удалить">
+</form>
+</body>
+</html>

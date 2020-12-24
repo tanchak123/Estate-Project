@@ -1,0 +1,31 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Пользователь</title>
+</head>
+<h1>История</h1>
+<body>
+<a href="/">Главная</a>
+<table>
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>Название</td>
+        <td>Уровень</td>
+        <td>Тип истории</td>
+        <td>Изменить</td>
+        <td>Список всех пользователей</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${history.id}"></td>
+        <td th:text="${history.name}"></td>
+        <td th:text="${history.historyType}"></td>
+        <td th:text="${history.historyLevel}"></td>
+        <td><a th:href="@{/history/update/{id}(id=${history.id})}">Изменить</a></td>
+        <td><a th:href="@{/histories}">Список всех историй</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
