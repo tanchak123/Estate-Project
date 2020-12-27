@@ -55,4 +55,5 @@ public class HistoryDetail {
     public void setHistory(History history) {
         this.history = history;
     }
+
 }

@@ -1,7 +1,11 @@
 package com.ithillel.model.history;
 
+import com.ithillel.enums.HistoryLevel;
+import com.ithillel.enums.HistoryType;
 import com.ithillel.model.Client;
 import com.ithillel.utils.CreateTimeStampConverter;
+import com.ithillel.utils.EnumTypePostgreSql;
+import org.hibernate.annotations.Type;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -38,10 +42,12 @@ public class History {
     private Client client;
 
     @Column(name = "history_level")
-    private String historyLevel;
+    @Enumerated(EnumType.ORDINAL)
+    private HistoryLevel historyLevel;
 
     @Column(name = "history_type")
-    private String historyType;
+    @Enumerated(EnumType.STRING)
+    private HistoryType historyType;
 
     @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}, mappedBy = "history")
     private HistoryDetail historyDetail;
@@ -70,20 +76,20 @@ public class History {
         this.client = client;
     }
 
-    public String getHistoryLevel() {
+    public HistoryLevel getHistoryLevel() {
         return historyLevel;
     }
 
-    public void setHistoryLevel(String history_level) {
-        this.historyLevel = history_level;
+    public void setHistoryLevel(HistoryLevel historyLevel) {
+        this.historyLevel = historyLevel;
     }
 
-    public String getHistoryType() {
+    public HistoryType getHistoryType() {
         return historyType;
     }
 
-    public void setHistoryType(String history_type) {
-        this.historyType = history_type;
+    public void setHistoryType(HistoryType historyType) {
+        this.historyType = historyType;
     }
 
     public HistoryDetail getHistoryDetail() {

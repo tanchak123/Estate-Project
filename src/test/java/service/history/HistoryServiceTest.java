@@ -1,6 +1,10 @@
 package service.history;
 
+import com.ithillel.enums.HistoryLevel;
+import com.ithillel.enums.HistoryType;
 import com.ithillel.model.*;
+import com.ithillel.model.dto.HistoryDetailsDto;
+import com.ithillel.model.dto.HistoryDto;
 import com.ithillel.model.history.History;
 import com.ithillel.model.history.HistoryDetail;
 import com.ithillel.service.interfaces.ClientService;
@@ -17,6 +21,7 @@ import service.ServiceTest;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
+import java.util.Arrays;
 
 public class HistoryServiceTest extends ServiceTest {
 
@@ -39,8 +44,8 @@ public class HistoryServiceTest extends ServiceTest {
     @Test
     public void createTest() {
         History history = new History();
-        history.setHistoryLevel("TEST");
-        history.setHistoryType("HIGH");
+        history.setHistoryLevel(HistoryLevel.LOW);
+        history.setHistoryType(HistoryType.CREATE);
         history.setCreateDate(System.currentTimeMillis());
         ClientService clientService = (ClientService) annotationConfigApplicationContext
                 .getBean("clientServiceImpl");
@@ -52,7 +57,7 @@ public class HistoryServiceTest extends ServiceTest {
         HistoryDetail historyDetail = new HistoryDetail();
         historyDetail.setHistory(history);
         historyDetail.setName(client.getName());
-        historyDetail.setValue(history.getHistoryType());
+        historyDetail.setValue(history.getHistoryType().name());
 
         history.setHistoryDetail(historyDetail);
         historyService.create(history);
@@ -68,9 +73,9 @@ public class HistoryServiceTest extends ServiceTest {
     @Test
     public void update() {
         History updated = historyService.getById(26L);
-        updated.setHistoryLevel("HIGH");
+        updated.setHistoryLevel(HistoryLevel.HIGH);
         historyService.update(updated);
-        String history_level = historyService.getById(updated.getId()).getHistoryLevel();
+        HistoryLevel history_level = historyService.getById(updated.getId()).getHistoryLevel();
         Assert.assertEquals("Local model and database model not equals"
                 , history_level
                 , updated.getHistoryLevel());
@@ -95,5 +100,18 @@ public class HistoryServiceTest extends ServiceTest {
         final String value = "TEST";
         CustomUtils.testPageable(name, value, historyService,
                 PageRequest.of(0, 3));
+    }
+
+    @Test
+    public void historyDto() {
+        History history = historyService.eagerGetById(24L);
+        HistoryDetailsDto detailsDto = new HistoryDetailsDto();
+        detailsDto.fromModel(history);
+        System.out.println(detailsDto.toString());
+        Assert.assertEquals(detailsDto.toString().split(",").length, 7);
+        HistoryDto historyDto = new HistoryDto();
+        historyDto.fromModel(history);
+        System.out.println(historyDto.toString());
+        Assert.assertEquals(historyDto.toString().split(",").length, 4);
     }
 }

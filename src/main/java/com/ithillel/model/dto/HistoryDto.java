@@ -7,9 +7,9 @@ import com.ithillel.model.history.History;
 
 
 public class HistoryDto extends CustomDto {
-//    private Long HistoryDetailId;
-    private String historyLevel;
-    private String historyType;
+
+    protected String historyLevel;
+    protected String historyType;
 
     public HistoryDto(String name, Long id) {
         super(name, id);
@@ -29,8 +29,8 @@ public class HistoryDto extends CustomDto {
     public void fromModel(History model) {
         setId(model.getId());
         setName(model.getName());
-        setHistoryLevel(model.getHistoryLevel());
-        setHistoryType(model.getHistoryType());
+        setHistoryLevel(model.getHistoryLevel().name());
+        setHistoryType(model.getHistoryType().name());
     }
 
     public String getHistoryLevel() {
@@ -47,5 +47,15 @@ public class HistoryDto extends CustomDto {
 
     public void setHistoryType(String historyType) {
         this.historyType = historyType;
+    }
+
+    @Override
+    public String toString() {
+        return "HistoryDto{" +
+                "historyLevel='" + historyLevel + '\'' +
+                ", historyType='" + historyType + '\'' +
+                ", name='" + name + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

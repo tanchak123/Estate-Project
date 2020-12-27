@@ -1,0 +1,12 @@
+body {
+    background-image: url(https://3ex42a1ldytt3khjmv48j69y-wpengine.netdna-ssl.com/wp-content/uploads/2019/05/Dallas_Skyline_with_Arts_District.png);
+}
+table, th, td {
+    background: rgba(255, 126, 74, 0.5);
+    margin: 0 auto;
+    border: 1px solid black;
+    alignment: center;
+}
+h1 {
+    color: #ff7e4a;
+}

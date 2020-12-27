@@ -1,5 +1,7 @@
 package service.client;
 
+import com.ithillel.enums.HistoryLevel;
+import com.ithillel.enums.HistoryType;
 import com.ithillel.model.Client;
 import com.ithillel.model.history.History;
 import com.ithillel.service.generic.interfaces.IteratorCustomService;
@@ -27,8 +29,8 @@ public class ClientServiceTest extends ServiceTest {
     public void createTest() {
             History history = new History();
             history.setName("createTest");
-            history.setHistoryLevel("TEST");
-            history.setHistoryType("HIGH");
+            history.setHistoryLevel(HistoryLevel.HIGH);
+            history.setHistoryType(HistoryType.CREATE);
             history.setCreateDate(System.currentTimeMillis());
 
             Client client = new Client();

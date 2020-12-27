@@ -4,8 +4,8 @@ import com.ithillel.model.Realtor;
 import com.ithillel.model.customodel.CustomModel;
 
 public class CustomDto {
-    private String name;
-    private Long id;
+    protected String name;
+    protected Long id;
 
     public CustomDto(String name, Long id) {
         this.name = name;
@@ -39,5 +39,13 @@ public class CustomDto {
 
     public CustomDto() {
 
+    }
+
+    @Override
+    public String toString() {
+        return "CustomDto{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                '}';
     }
 }

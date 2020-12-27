@@ -1,8 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>История</title>
-    <style></style>
-    <link href="/style.css" rel="style sheet" type="text/css"/>
+    <title>Подробная история</title>
+    <link href="/style" rel="stylesheet" />
 </head>
 <h1>История</h1>
 <body>
@@ -14,8 +13,10 @@
         <td>Название</td>
         <td>Уровень</td>
         <td>Тип истории</td>
+        <td>детал.ID</td>
+        <td>детал.Название</td>
+        <td>детал.Значение</td>
         <td>Изменить</td>
-        <td si>Детали</td>
         <td>Список всех пользователей</td>
     </tr>
     </thead>
@@ -25,8 +26,9 @@
         <td th:text="${history.name}"></td>
         <td th:text="${history.historyType}"></td>
         <td th:text="${history.historyLevel}"></td>
-        <td><a th:href="@{/history/update/{id}(id=${history.id})}">Изменить</a></td>
-        <td><a th:href="@{/history/{id}/details(id=${history.id})}">Подробнее</a></td>
+        <td th:text="${history.detailId}"></td>
+        <td th:text="${history.detailName}"></td>
+        <td th:text="${history.value}"></td>
         <td><a th:href="@{/histories}">Список всех историй</a></td>
     </tr>
     </tbody>

@@ -1,6 +1,7 @@
 package com.ithillel.controller;
 
 import com.ithillel.model.Realtor;
+import com.ithillel.model.dto.HistoryDetailsDto;
 import com.ithillel.model.dto.HistoryDto;
 import com.ithillel.model.history.History;
 import com.ithillel.service.interfaces.HistoryService;
@@ -102,4 +103,13 @@ public class HistoryController {
     private String postCreate(@ModelAttribute History history) {
         return "redirect:/" + name + "/" + historyService.create(history).getId();
     }
+
+    @GetMapping(value = "/" + name + "/{id}/details")
+    private String getDetails(@PathVariable Long id, Model model) {
+        History history = historyService.eagerGetById(id);
+        HistoryDetailsDto detailsDto = new HistoryDetailsDto();
+        detailsDto.fromModel(history);
+        model.addAttribute("history", detailsDto);
+        return String.format("%s/%sDetails", pluralName, name);
     }
+}

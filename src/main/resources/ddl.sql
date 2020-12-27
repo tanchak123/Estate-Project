@@ -91,8 +91,8 @@ create table if not exists history
 (
     id bigserial primary key,
     name varchar(100),
-    history_level varchar(100),
-    history_type varchar(100),
+    history_level varchar(255),
+    history_type varchar(255),
     create_date timestamp without time zone not null default current_timestamp
 );
 create table if not exists client_history (
@@ -110,6 +110,13 @@ create table if not exists history_detail (
     FOREIGN KEY (history_id) references history(id)
 );
 CREATE UNIQUE INDEX history_detail_id ON history_detail (id);
+
+CREATE TYPE history_type AS ENUM (
+    'CREATE', 'DELETE', 'UPDATE', 'READ'
+    );
+CREATE TYPE history_level AS ENUM (
+    'LOW', 'MEDIUM', 'HIGH'
+    );
 DELETE FROM region;
 DELETE FROM city;
 DELETE FROM area;
@@ -144,5 +151,3 @@ drop function  delete_all_by_date(given_date history.create_date%type);
 call delete_all_by_date('2020-11-19 14:38:01.603000'::timestamp without time zone);
 
 select * from delete_all_by_date('2020-11-19 14:38:01.603000'::timestamp without time zone);
-
-SELECT * from history where client_id = 7
