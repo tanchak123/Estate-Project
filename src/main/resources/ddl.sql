@@ -83,6 +83,7 @@ create table if not exists client
     surname varchar(100),
     login varchar(100),
     password varchar(100),
+    role client_role default USER,
     create_date timestamp without time zone not null default current_timestamp,
     update_date timestamp without time zone not null default current_timestamp
 );
@@ -116,6 +117,9 @@ CREATE TYPE history_type AS ENUM (
     );
 CREATE TYPE history_level AS ENUM (
     'LOW', 'MEDIUM', 'HIGH'
+    );
+CREATE TYPE client_role AS ENUM (
+    'USER', 'ADMIN', 'DELETED'
     );
 DELETE FROM region;
 DELETE FROM city;

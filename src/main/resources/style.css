@@ -1,5 +1,5 @@
 body {
-    background-image: url(/resources/img/background.png);
+    background-image: url(resources/background.png);
 }
 table, th, td {
     background: rgba(255, 126, 74, 0.5);

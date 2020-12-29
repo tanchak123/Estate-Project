@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ClientDao extends CustomDao<Client, Long>, IteratorCustomDao<Client> {
-
+    Client findAllByLogin(String login);
 }

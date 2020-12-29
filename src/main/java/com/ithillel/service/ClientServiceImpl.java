@@ -25,4 +25,8 @@ public class ClientServiceImpl extends CustomServiceImpl<Client, Long> implement
         this.client = client;
     }
 
+    @Override
+    public Client getByLogin(String login) {
+        return clientDao.findAllByLogin(login);
+    }
 }

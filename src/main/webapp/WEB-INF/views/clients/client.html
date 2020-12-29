@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Пользователь</title>
-    <link th:href="@{static/css/style.css}" rel="stylesheet" />
+    <link th:href="@{/resources/style.css/}" rel="stylesheet" />
 </head>
 <h1>Профиль</h1>
 <body>
@@ -13,6 +13,7 @@
         <td>Имя</td>
         <td>Фамилия</td>
         <td>Логин</td>
+        <td>Роль</td>
         <td>Изменить</td>
         <td>Список всех пользователей</td>
     </tr>
@@ -23,6 +24,7 @@
         <td th:text="${client.name}"></td>
         <td th:text="${client.surname}"></td>
         <td th:text="${client.login}"></td>
+        <td th:text="${client.role}"></td>
         <td><a th:href="@{/client/update/{id}(id=${client.id})}">Изменить</a></td>
         <td><a th:href="@{/clients}">Все пользователи</a></td>
     </tr>

@@ -1,5 +1,6 @@
 package com.ithillel.model;
 
+import com.ithillel.enums.UserRole;
 import com.ithillel.model.customodel.CustomModel;
 import com.ithillel.model.history.History;
 import org.hibernate.annotations.DynamicUpdate;
@@ -24,6 +25,10 @@ public class Client extends CustomModel {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, mappedBy = "client", orphanRemoval = true)
     private List<History> historyList = new ArrayList<>();
@@ -64,16 +69,11 @@ public class Client extends CustomModel {
         this.historyList.addAll(historyList);
     }
 
-    @Override
-    public String toString() {
-        return "Client{" +
-                "surname='" + surname + '\'' +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", id=" + id +
-                ", updateDate=" + updateDate +
-                ", createDate=" + createDate +
-                ", name='" + name + '\'' +
-                '}';
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }

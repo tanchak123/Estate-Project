@@ -1,13 +1,15 @@
-package com.ithillel.appcontext.web.appcontext;
+package com.ithillel.appcontext.web;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
 import com.ithillel.appcontext.ApplicationContext;
+import com.ithillel.appcontext.security.SecurityConfig;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.DispatcherServlet;
 
 public class WebInit implements WebApplicationInitializer {
@@ -17,7 +19,7 @@ public class WebInit implements WebApplicationInitializer {
         servletContext.setRequestCharacterEncoding("UTF-8");
         final AnnotationConfigWebApplicationContext configApplicationContext
                 = new AnnotationConfigWebApplicationContext();
-        configApplicationContext.register(ApplicationContext.class);
+        configApplicationContext.register(ApplicationContext.class, SecurityConfig.class);
         servletContext.addListener(new ContextLoaderListener(configApplicationContext));
         final AnnotationConfigWebApplicationContext webApplicationContext
                 = new AnnotationConfigWebApplicationContext();
@@ -26,6 +28,10 @@ public class WebInit implements WebApplicationInitializer {
                 ,new DispatcherServlet(webApplicationContext));
         dispatcherServlet.setLoadOnStartup(1);
         dispatcherServlet.addMapping("/");
+
+        servletContext.addFilter("springSecurityFilterChain",
+                new DelegatingFilterProxy("springSecurityFilterChain"))
+                .addMappingForUrlPatterns(null, true, "/*");
     }
 
 }

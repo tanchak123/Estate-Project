@@ -6,12 +6,14 @@ public class ClientDto {
     private String name;
     private String surname;
     private String login;
+    private String role;
 
-    public ClientDto(Long id, String name, String surName, String login) {
+    public ClientDto(Long id, String name, String surname, String login, String role) {
         this.id = id;
         this.name = name;
-        this.surname = surName;
+        this.surname = surname;
         this.login = login;
+        this.role = role;
     }
 
     public ClientDto() {
@@ -47,5 +49,13 @@ public class ClientDto {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

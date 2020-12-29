@@ -17,6 +17,7 @@ public interface CustomService<C, L> {
 
     C getById(final L id);
 
+
     void cascadeDelete(final C c);
 
     void delete(C c);

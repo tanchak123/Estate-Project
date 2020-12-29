@@ -9,11 +9,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@EnableWebMvc
 public class ClientsController {
     @Autowired
     private ClientService clientService;
@@ -32,7 +35,8 @@ public class ClientsController {
         clients.forEach(client -> clientDtoList.add(new ClientDto(client.getId(),
                 client.getName(),
                 client.getSurname(),
-                client.getLogin())));
+                client.getLogin(),
+                client.getRole().name())));
         model.addAttribute("clients", clientDtoList);
         model.addAttribute("page", page);
         return "clients/clients";

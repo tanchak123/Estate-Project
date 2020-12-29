@@ -4,12 +4,7 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.annotation.PropertySources;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -28,7 +23,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
         "com.ithillel.controller",
         "com.ithillel.service",
         "com.ithillel.dao",
-        "com.ithillel.model"})
+        "com.ithillel.model",})
 
 @PropertySources({
         @PropertySource("classpath:postgre.props"),

@@ -5,4 +5,5 @@ import com.ithillel.service.generic.interfaces.CustomService;
 import com.ithillel.service.generic.interfaces.IteratorCustomService;
 
 public interface ClientService extends CustomService<Client, Long>, IteratorCustomService<Client> {
+    Client getByLogin(String login);
 }
