@@ -36,20 +36,10 @@ public class MainPageController {
         return "main.html";
     }
 
-    @GetMapping("/myprofile")
-    public String myProfile(Authentication authentication) {
-        System.out.println(authentication.getName());
-        System.out.println("AUTO" + authentication.getAuthorities().toString());
-        System.out.println("DETAILS" + authentication.getDetails().toString());
-        System.out.println("PRINCIPAL" + authentication.getPrincipal().toString());
-        Client client = clientService.getByLogin(authentication.getName());
-        System.out.println(client.getId());
-        return "redirect:/client/" + client.getId();
-    }
+
 
     @GetMapping(value = "/style")
     public String css() {
         return "css/style.css";
     }
-
 }

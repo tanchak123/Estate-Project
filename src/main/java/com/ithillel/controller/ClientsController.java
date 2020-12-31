@@ -1,11 +1,14 @@
 package com.ithillel.controller;
 
+import com.ithillel.enums.UserRole;
 import com.ithillel.model.Client;
 import com.ithillel.model.dto.ClientDto;
 import com.ithillel.service.interfaces.ClientService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -42,10 +46,24 @@ public class ClientsController {
         return "clients/clients";
     }
 
+    @GetMapping("/myprofile")
+    public String myProfile(Authentication authentication) {
+        Client client = clientService.getByLogin(authentication.getName());
+        return "redirect:/client/" + client.getId();
+    }
+
     @RequestMapping("/client/{id}")
     public String allClients(Model model,
-                             @PathVariable Long id) {
+                             @PathVariable Long id, Authentication authentication) {
         Client client = clientService.getById(id);
+        String role = "";
+        for (GrantedAuthority grantedAuthority : authentication.getAuthorities()) {
+            role = grantedAuthority.getAuthority();
+        }
+        if (!role.substring(role.length() - 5).equals(UserRole.ADMIN.name()) && !client.getLogin()
+                .equals(authentication.getName())) {
+            return "redirect:/client/" + clientService.getByLogin(authentication.getName()).getId();
+        }
         ModelMapper modelMapper = new ModelMapper();
         ClientDto clientDto = modelMapper.map(client, ClientDto.class);
         model.addAttribute("client", clientDto);
